@@ -336,6 +336,7 @@ export default function AdminDashboard() {
                 </NavLink>
 
                 {/* Fechas de show */}
+                <NavLink to="/admin/showdates">
                 <div className="bg-white p-6 rounded-xl shadow-sm border-l-4 border-blue-500 hover:shadow-md transition-shadow cursor-pointer">
                     <h3 className="text-slate-500 text-xs font-medium mb-2 uppercase tracking-wide">
                         Show Dates
@@ -347,6 +348,7 @@ export default function AdminDashboard() {
                         Created on all tours
                     </p>
                 </div>
+                </NavLink>
 
                 {/* Reservas */}
                 <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-200 hover:shadow-md transition-shadow cursor-pointer">

@@ -20,6 +20,7 @@ import AdminDashboard from "@/pages/adminDashboard";
 import AdminTour from "@/pages/adminTour";
 import AdminLogin from "@/pages/login";// importa la vista de login
 import ToursListAdmin from "@/pages/toursListAdmin";
+import ShowDatesAdmin from "@/pages/ShowDatesAdmin";
 
 
 
@@ -88,6 +89,15 @@ export default function App() {
           element={
             <RequireAdmin>
               <ToursListAdmin />
+            </RequireAdmin>
+          }
+        />
+
+        <Route
+          path="/admin/showdates"
+          element={
+            <RequireAdmin>
+              <ShowDatesAdmin />
             </RequireAdmin>
           }
         />
