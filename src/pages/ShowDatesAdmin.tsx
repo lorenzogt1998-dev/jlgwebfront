@@ -104,7 +104,7 @@ const ShowDatesAdmin: React.FC = () => {
   }
 
   return (
-    <div className="p-6">
+    <div className="p-6 pt-28">
       {/* Total de fechas */}
       <div className="bg-white p-6 rounded-xl shadow-sm border-l-4 border-blue-500 mb-6">
         <h3 className="text-slate-500 text-xs font-medium mb-2 uppercase tracking-wide">
