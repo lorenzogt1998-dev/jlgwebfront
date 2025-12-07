@@ -351,17 +351,19 @@ export default function AdminDashboard() {
                 </NavLink>
 
                 {/* Reservas */}
-                <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-200 hover:shadow-md transition-shadow cursor-pointer">
-                    <h3 className="text-slate-500 text-xs font-medium mb-2 uppercase tracking-wide">
-                        Ticket Reservations
-                    </h3>
-                    <p className="text-4xl font-bold text-emerald-600">
-                        {totalReservations}
-                    </p>
-                    <p className="text-slate-500 text-xs mt-1">
-                        {totalSeatsRequested} seats requested
-                    </p>
-                </div>
+                <NavLink to="/admin/reservations">
+                    <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-200 hover:shadow-md transition-shadow cursor-pointer">
+                        <h3 className="text-slate-500 text-xs font-medium mb-2 uppercase tracking-wide">
+                            Ticket Reservations
+                        </h3>
+                        <p className="text-4xl font-bold text-emerald-600">
+                            {totalReservations}
+                        </p>
+                        <p className="text-slate-500 text-xs mt-1">
+                            {totalSeatsRequested} seats requested
+                        </p>
+                    </div>
+                </NavLink>
             </div>
 
             {/* Zona principal: tabla + alertas */}
@@ -433,7 +435,7 @@ export default function AdminDashboard() {
                                                     </select>
                                                 </td>
 
-                                                {/* 🔥 BOTÓN DELETE */}
+                                                {/* BOTÓN DELETE */}
                                                 <td className="py-2 text-right">
                                                     <button
                                                         type="button"

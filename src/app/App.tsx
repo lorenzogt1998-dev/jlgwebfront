@@ -18,9 +18,10 @@ import SetDateAdmin from "@/pages/setDateAdmin";
 import ReserveTicketAdmin from "@/pages/reserveTicketAdmin";
 import AdminDashboard from "@/pages/adminDashboard";
 import AdminTour from "@/pages/adminTour";
-import AdminLogin from "@/pages/login";// importa la vista de login
+import AdminLogin from "@/pages/login";
 import ToursListAdmin from "@/pages/toursListAdmin";
 import ShowDatesAdmin from "@/pages/ShowDatesAdmin";
+import ReservationsAdmin from "@/pages/ReservationsAdmin";
 
 
 
@@ -98,6 +99,15 @@ export default function App() {
           element={
             <RequireAdmin>
               <ShowDatesAdmin />
+            </RequireAdmin>
+          }
+        />
+
+        <Route
+          path="/admin/reservations"
+          element={
+            <RequireAdmin>
+              <ReservationsAdmin />
             </RequireAdmin>
           }
         />
