@@ -14,7 +14,7 @@ export default function Home() {
 
   return (
     <div id="main" className="space-y-16">
-      {/* 👈 space-y-16 ya agrega separación global entre bloques grandes */}
+      {/* space-y-16 ya agrega separación global entre bloques grandes */}
 
       {/* Slider */}
       <div className="mb-10">

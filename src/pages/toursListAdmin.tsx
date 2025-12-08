@@ -111,18 +111,28 @@ export default function ToursListAdmin() {
     <div className="min-h-screen bg-gray-50 px-6 py-10 flex justify-center pt-28">
       <div className="w-full max-w-6xl">
 
-        {/* HEADER */}
-        <div className="flex items-center gap-4 mb-10">
-          <div className="w-14 h-14 bg-gradient-to-br from-[#243f4a] to-[#2fa79a] rounded-2xl flex items-center justify-center shadow-md">
-            <MapPinned className="w-8 h-8 text-white" />
-          </div>
-          <div>
-            <h1 className="text-3xl font-bold text-[#243f4a]">Listado de Tours</h1>
-            <p className="text-gray-500 text-sm mt-1">Administración general de tours</p>
-          </div>
-        </div>
+              {/* HEADER */}
+              <div className="flex items-center gap-4 mb-6">
+                  <div className="w-14 h-14 bg-gradient-to-br from-[#243f4a] to-[#2fa79a] rounded-2xl flex items-center justify-center shadow-md">
+                      <MapPinned className="w-8 h-8 text-white" />
+                  </div>
+                  <div className="flex flex-col md:flex-row md:items-center md:justify-between w-full">
+                      <div>
+                          <h1 className="text-3xl font-bold text-[#243f4a]">Listado de Tours</h1>
+                          <p className="text-gray-500 text-sm mt-1">Administración general de tours</p>
+                      </div>
 
-        {/* mensajes */}
+                      {/* NUEVO BOTÓN */}
+                      <a
+                          href="http://localhost:5173/posts/tour/admin"
+                          className="mt-4 md:mt-0 inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#243f4a] to-[#2fa79a] text-white font-semibold shadow hover:scale-[1.02] transition-all"
+                      >
+                          Nuevo Tour
+                      </a>
+                  </div>
+              </div>
+
+              { }
         {showMessage && (
           <div
             className={`

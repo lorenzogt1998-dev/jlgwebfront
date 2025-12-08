@@ -254,7 +254,7 @@ export default function AdminDashboard() {
                 Panel de Administración
               </h1>
               <p className="text-[#243f4a]/60 text-lg font-medium max-w-2xl leading-relaxed">
-                Gestiona tours, fechas de shows y reservas de tickets en un solo lugar.
+                Gestion de tours, fechas de shows y reservas de tickets.
               </p>
             </div>
 

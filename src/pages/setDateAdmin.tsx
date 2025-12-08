@@ -140,7 +140,7 @@ export default function SetDateAdmin() {
               <input
                 type="text"
                 name="timeSlot"
-                placeholder="10:00 AM, Evening, etc."
+                placeholder="Format 10:00:00"
                 className="w-full border rounded-md px-3 py-2 text-sm"
               />
             </div>
