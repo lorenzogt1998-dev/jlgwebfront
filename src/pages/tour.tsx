@@ -1,99 +1,170 @@
-import { useMemo, useState } from "react";
-import { events2024, events2025, EventRow } from "@/mocks/events";
+// src/pages/Tour.tsx
+import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 
-function monthName(m: number) {
-  return new Date(2000, m - 1, 1).toLocaleString("en-US", { month: "long" });
+type ShowStatus = "OPEN" | "CLOSED" | "CANCELED" | "";
+
+type ShowDate = {
+  id: number;
+  date: string;       // ISO string desde el backend
+  city: string;
+  state: string;
+  country: string;
+  venueName: string;
+  venueType: string;
+  timeSlot: string;
+  status: ShowStatus;
+  // si después tu backend manda más cosas (tour, etc.) las podés agregar acá
+};
+
+const API_BASE_URL =
+  import.meta.env.VITE_API_BASE_URL ?? "http://localhost:8080";
+
+// ------- helpers -------
+
+function monthNameFromDate(d: Date) {
+  return d.toLocaleString("en-US", { month: "long" });
 }
 
-function dateHuman(e: EventRow) {
-  return `${monthName(e.month)} ${e.day}, ${e.year}`;
+function formatDateHuman(dateStr: string) {
+  const d = new Date(dateStr);
+  if (Number.isNaN(d.getTime())) return dateStr;
+  return `${monthNameFromDate(d)} ${d.getDate()}, ${d.getFullYear()}`;
 }
 
-function mapLink(e: EventRow) {
-  const q = `${e.address}, ${e.city}, ${e.state}`.replace(/\s+/g, "+");
-  return `https://maps.google.com/maps?hl=en&q=${q}&t=m&z=12`;
-}
+function StatusButton({ show }: { show: ShowDate }) {
+  const baseBtn =
+    "inline-flex items-center justify-center px-5 py-2 rounded-full text-sm font-semibold shadow-lg transition transform hover:-translate-y-0.5";
 
-function StatusButton({ e }: { e: EventRow }) {
-  if (!e.reservation_link) return <p>&nbsp;</p>;
-  switch (e.status) {
-    case "open":
-      return (
-        <>
-          <a className="button" href={`${e.reservation_link}?event_id=${e.event_id}`}>Reserve Seats</a>
-          <p>&nbsp;</p>
-        </>
-      );
-    case "half full":
-      return (
-        <>
-          <a className="button" href={`${e.reservation_link}?event_id=${e.event_id}`}>Reserve Seats</a>
-          <p><i>a few tickets left!</i></p>
-        </>
-      );
-    case "sold out":
-      return (
-        <>
-          <a className="button" href={`${e.reservation_link}?event_id=${e.event_id}&referral=waiting_list`}>Waiting List</a>
-          <p><i>this concert is sold out</i></p>
-        </>
-      );
-    default:
-      return <p>&nbsp;</p>;
+  if (show.status === "OPEN") {
+    // Podés cambiar la ruta cuando tengas tu flujo de reservas definido
+    return (
+      <div className="space-y-1">
+        <Link
+          to={`/posts/reserveTicket`}
+          className={`${baseBtn} bg-gradient-to-r from-amber-400 to-yellow-300 text-slate-900 hover:brightness-110`}
+        >
+          Reserve Seats
+        </Link>
+        <p className="text-xs text-amber-500 italic">
+          tickets available
+        </p>
+      </div>
+    );
   }
+
+  if (show.status === "CANCELED") {
+    return (
+      <p className="text-xs text-red-400 italic">
+        This show was canceled.
+      </p>
+    );
+  }
+
+  if (show.status === "CLOSED") {
+    return (
+      <p className="text-xs text-slate-400 italic">
+        Reservations are closed.
+      </p>
+    );
+  }
+
+  return <p className="text-xs text-slate-400">&nbsp;</p>;
 }
 
-function Accordion({ title, items }: { title: string; items: EventRow[] }) {
+function Accordion({ title, items }: { title: string; items: ShowDate[] }) {
   const [open, setOpen] = useState<number | null>(null);
-  const list = useMemo(() => items.slice().sort((a,b) =>
-    a.year - b.year || a.month - b.month || a.day - b.day
-  ), [items]);
+
+  const list = useMemo(
+    () =>
+      items
+        .slice()
+        .sort(
+          (a, b) =>
+            new Date(a.date).getTime() - new Date(b.date).getTime()
+        ),
+    [items]
+  );
+
+  if (!list.length) return null;
 
   return (
-    <section className="mx-auto max-w-6xl px-4 py-8">
-      <h4 className="text-center text-xl font-semibold mb-4">{title}</h4>
-      <ul className="divide-y">
-        {list.map((e, idx) => {
+    <section className="mx-auto max-w-6xl px-4 py-10">
+      <h4 className="text-center text-xl font-semibold mb-6 tracking-wide text-slate-900">
+        {title}
+      </h4>
+
+      <ul className="space-y-4">
+        {list.map((show, idx) => {
           const isOpen = open === idx;
-          const bg = e.type === "christian" ? "bg-green-50" : "";
+          const showDate = new Date(show.date);
+
           return (
-            <li key={e.event_id} className={bg}>
+            <li
+              key={show.id}
+              className="rounded-3xl bg-gradient-to-br from-slate-900 via-slate-900 to-slate-800 text-slate-100 shadow-2xl border border-slate-700/70 overflow-hidden"
+            >
+              {/* Header */}
               <button
                 type="button"
                 onClick={() => setOpen(isOpen ? null : idx)}
-                className="w-full text-left px-4 py-3 hover:bg-gray-50"
+                className="w-full px-6 py-4 flex items-center justify-between gap-4 hover:bg-slate-800/70 transition"
               >
-                <h5 className="text-sm font-semibold flex justify-between items-center">
-                  <span>{monthName(e.month)}, {e.day} - {e.city}, {e.state}</span>
-                  <small className="text-amber-700">more info</small>
-                </h5>
+                <div className="flex flex-col sm:flex-row sm:items-center sm:gap-4">
+                  <span className="text-sm font-semibold text-amber-300">
+                    {formatDateHuman(show.date)}
+                  </span>
+                  <span className="text-sm text-slate-200">
+                    {show.city}, {show.state}
+                  </span>
+                  <span className="text-xs text-slate-400">
+                    {show.venueName}
+                  </span>
+                </div>
+
+                <div className="flex items-center gap-3">
+                  {show.status && (
+                    <span className="text-xs uppercase tracking-wide px-3 py-1 rounded-full border border-amber-400/60 text-amber-200">
+                      {show.status}
+                    </span>
+                  )}
+                  <span className="text-xs text-amber-300">
+                    {isOpen ? "hide details" : "more info"}
+                  </span>
+                </div>
               </button>
 
+              {/* Body */}
               {isOpen && (
-                <div className="px-4 pb-5">
-                  <div className="grid md:grid-cols-3 gap-6 pt-2">
-                    <div className="md:col-span-2 text-sm leading-6">
-                      <strong>Hosting Teacher:</strong> {e.host_firstname} {e.host_lastname}<br />
-                      <strong>Email:</strong>{" "}
-                      <a
-                        href={`mailto:concerts@justolamasgroup.com?subject=Justo Lamas Concert in ${e.city}, ${e.state}`}
-                      >
-                        concerts@justolamasgroup.com
-                      </a><br />
-                      <strong>Date:</strong> {dateHuman(e)}<br />
-                      <strong>Time:</strong> {e.time} plus 30 minutes for autographs<br />
-                      <strong>School:</strong> {e.school}<br />
-                      <strong>Address:</strong>{" "}
-                      <a href={mapLink(e)} target="_blank" rel="noreferrer">
-                        {e.address} {e.city} {e.state}, {e.country}
-                      </a>
-                      {/* El viejo form a send_mail.php lo omitimos;
-                          más adelante lo reemplazás por tu endpoint Java */}
+                <div className="px-6 pb-6 pt-2 border-t border-slate-700/70">
+                  <div className="grid md:grid-cols-3 gap-6 pt-3">
+                    {/* Info */}
+                    <div className="md:col-span-2 text-sm leading-6 space-y-1">
+                      <p>
+                        <strong className="text-slate-100">Date:</strong>{" "}
+                        {formatDateHuman(show.date)}
+                      </p>
+                      <p>
+                        <strong className="text-slate-100">Time:</strong>{" "}
+                        {show.timeSlot}
+                      </p>
+                      <p>
+                        <strong className="text-slate-100">Venue:</strong>{" "}
+                        {show.venueName} ({show.venueType})
+                      </p>
+                      <p>
+                        <strong className="text-slate-100">City:</strong>{" "}
+                        {show.city}, {show.state}, {show.country}
+                      </p>
                     </div>
 
-                    <div className="text-center pt-5">
-                      <StatusButton e={e} />
+                    {/* CTA */}
+                    <div className="flex flex-col items-center justify-center gap-3 text-center">
+                      <StatusButton show={show} />
+                      <p className="text-[11px] text-slate-400 max-w-[14rem]">
+                        Need help? Write us and we’ll assist you with the
+                        booking process.
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -106,43 +177,99 @@ function Accordion({ title, items }: { title: string; items: EventRow[] }) {
   );
 }
 
+// --------- PAGE ----------
+
 export default function Tour() {
+  const [shows, setShows] = useState<ShowDate[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const load = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+
+        const res = await fetch(`${API_BASE_URL}/api/show-dates`);
+        if (!res.ok) {
+          throw new Error(`HTTP ${res.status}`);
+        }
+
+        const data: ShowDate[] = await res.json();
+        setShows(data);
+      } catch (err: any) {
+        console.error(err);
+        setError("Could not load tour dates. Please try again later.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    load();
+  }, []);
+
   return (
-    <div className="max-w-3xl mx-auto px-4 py-12 pt-28">
-      <div className="mb-6">
-        <h1 className="text-3xl font-bold">Tour Dates</h1>
+    <div className="pt-28 pb-16">
+      {/* Cabecera tipo “Our Music” */}
+      <div className="max-w-4xl mx-auto px-4 mb-10 text-center">
+        <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight text-slate-900">
+          Tour Dates
+        </h1>
+        <p className="mt-3 text-slate-600 text-sm md:text-base">
+          The{" "}
+          <strong className="text-amber-600">
+            Justo Lamas Group Concerts
+          </strong>{" "}
+          are an educational program with the primary objective of promoting
+          the study of the Spanish language through music.
+        </p>
+        <p className="mt-2 text-slate-600 text-sm md:text-base">
+          During the last years we have taken concerts to schools all across the
+          USA, creating enthusiasm and motivation for Spanish in thousands of
+          students.
+        </p>
+        <p className="mt-2 text-slate-700 text-sm md:text-base">
+          <strong>
+            <em>
+              The JLG Concerts program is much more than a concert – it is an
+              inspiring educational experience.
+            </em>
+          </strong>
+        </p>
       </div>
 
-      <div className="mb-6">
-        <p>
-          The <strong>Justo Lamas Group Concerts</strong> are an educational program with the primary
-          objective of promoting the study of the Spanish language thru music.
-        </p>
-        <p className="mt-2">
-          During the 18 years we have been taking the Concerts to Schools all around the USA,
-          we have heard hundreds of Teachers say how our program has created in their students
-          interest and enthusiasm for the Spanish language.
-        </p>
-        <p className="mt-2">
-          <strong><em>The JLG Concerts program is much more than a concert. It is an inspiring educational activity.</em></strong>
-        </p>
-      </div>
-
-      <div className="mb-8">
-        <a href="/book_a_date.php">
+      {/* Banner “Set a date now” */}
+      <div className="max-w-4xl mx-auto px-4 mb-10">
+        <a href="/book_a_date.php" className="block">
           <img
             src="/images/222.png"
             alt="Set a Date"
+            className="w-full rounded-3xl shadow-xl border border-slate-200"
           />
         </a>
       </div>
 
-      {/* Secciones como en el PHP original */}
-      <Accordion title="Legado Tour 2026-2027" items={events2025} />
+      {/* Errores / loading */}
+      {loading && (
+        <p className="text-center text-sm text-slate-500">
+          Loading tour dates...
+        </p>
+      )}
+      {error && (
+        <p className="text-center text-sm text-red-500 mb-4">
+          {error}
+        </p>
+      )}
 
-      {/* En el futuro, si querés detalle por slug: */}
-      <div className="mt-12 text-sm">
-        <Link to="/booking" className="underline">Go to booking</Link>
+      {/* Acordeón con todos los shows */}
+      {!loading && !error && (
+        <Accordion title="Legado Tour 2026-2027" items={shows} />
+      )}
+
+      <div className="max-w-4xl mx-auto px-4 mt-10 text-right text-xs text-slate-500">
+        <Link to="/booking" className="underline hover:text-amber-600">
+          Go to booking
+        </Link>
       </div>
     </div>
   );
