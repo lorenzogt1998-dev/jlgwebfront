@@ -152,6 +152,7 @@ const ShowDatesAdmin: React.FC = () => {
                         </div>
                     </div>
 
+
                     {/* SEARCH INPUT */}
                     <div className="relative w-full md:w-64">
                         <input
@@ -163,6 +164,13 @@ const ShowDatesAdmin: React.FC = () => {
                         />
                         <Search className="absolute left-3 top-2.5 w-5 h-5 text-gray-400" />
                     </div>
+
+                    <a
+                        href="http://localhost:5173/posts/setDate/admin"
+                        className="mt-4 md:mt-0 inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#243f4a] to-[#2fa79a] text-white font-semibold shadow hover:scale-[1.02] transition-all"
+                    >
+                        Nuevo Show
+                    </a>
                 </div>
 
                 {/* RESUMEN DE TOTAL */}

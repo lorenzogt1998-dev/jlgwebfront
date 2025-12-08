@@ -1,6 +1,6 @@
-// src/pages/setDateAdmin.tsx
 import React, { useEffect, useState } from "react";
 import { adminFetch } from "@/services/api";
+import { X } from "lucide-react";
 
 type Tour = {
   id: number;
@@ -12,21 +12,22 @@ export default function SetDateAdmin() {
   const [tours, setTours] = useState<Tour[]>([]);
   const [loadingTours, setLoadingTours] = useState(false);
   const [selectedTourId, setSelectedTourId] = useState<number | "">("");
+  const [showMessage, setShowMessage] = useState<{
+    type: "success" | "error" | "info";
+    text: string;
+  } | null>(null);
 
   useEffect(() => {
     async function loadTours() {
       try {
         setLoadingTours(true);
-
-        // ACÁ EL CAMBIO IMPORTANTE
         const resp = await adminFetch("http://localhost:8080/api/tours");
         if (!resp.ok) throw new Error("Error loading tours");
-
         const data = await resp.json();
         setTours(data);
       } catch (err) {
         console.error(err);
-        alert("Error loading tours from backend");
+        setShowMessage({ type: "error", text: "Error loading tours from backend" });
       } finally {
         setLoadingTours(false);
       }
@@ -34,11 +35,10 @@ export default function SetDateAdmin() {
     loadTours();
   }, []);
 
-
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (!selectedTourId) {
-      alert("Please select a tour first.");
+      setShowMessage({ type: "error", text: "Please select a tour first." });
       return;
     }
 
@@ -69,37 +69,61 @@ export default function SetDateAdmin() {
       if (!resp.ok) throw new Error("Error creating show date");
 
       const saved = await resp.json();
-      alert(`ShowDate created! ID: ${saved.id}`);
+      setShowMessage({ type: "success", text: `ShowDate created! ID: ${saved.id}` });
       form.reset();
       setSelectedTourId("");
     } catch (err) {
       console.error(err);
-      alert("There was a problem creating the show date.");
+      setShowMessage({ type: "error", text: "There was a problem creating the show date." });
     }
+  }
+
+  function handleCancel() {
+    setShowMessage({ type: "info", text: "Accion cancelada!" });
+    setTimeout(() => {
+      setShowMessage(null);
+      window.location.href = "/posts/admin/dashboard";
+    }, 2000);
   }
 
   return (
     <div className="max-w-3xl mx-auto px-4 py-12 pt-28">
       <header className="text-center mb-10">
-        <h1 className="text-3xl md:text-4xl font-bold tracking-wide mb-2">
-          Admin · Create Show Date
+        <h1 className="text-3xl md:text-4xl font-bold tracking-wide mb-2 text-[#243f4a]">
+          Create Show Date
         </h1>
-        <p className="text-gray-700 max-w-2xl mx-auto">
+        <p className="text-gray-600 max-w-2xl mx-auto text-sm md:text-base">
           Use this screen to create an official Show Date in the database
           after reviewing the <strong>Set a Date</strong> email.
         </p>
       </header>
 
+      {/* Pop-up message */}
+      {showMessage && (
+        <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50 px-4">
+          <div className="bg-white rounded-3xl shadow-xl p-8 w-full max-w-sm border border-gray-100 relative text-center">
+            <button
+              onClick={() => setShowMessage(null)}
+              className="absolute top-4 right-4 text-gray-400 hover:text-gray-600"
+            >
+              <X className="w-5 h-5" />
+            </button>
+            <h2 className="text-xl font-bold text-[#243f4a] mb-4">
+              {showMessage.type === "success" ? "¡Éxito!" : showMessage.type === "error" ? "Error" : "Información"}
+            </h2>
+            <p className="text-gray-700 text-sm mb-6">{showMessage.text}</p>
+          </div>
+        </div>
+      )}
+
       <form
         onSubmit={handleSubmit}
-        className="bg-white shadow-lg rounded-2xl p-6 md:p-8 space-y-6 border"
+        className="bg-white shadow-lg rounded-3xl p-6 md:p-8 space-y-6 border border-gray-100"
       >
         {/* TOUR */}
         <div>
-          <h2 className="text-lg font-semibold mb-3">Tour</h2>
-          <label className="block text-sm font-medium mb-1">
-            Select Tour *
-          </label>
+          <h2 className="text-lg font-semibold mb-3 text-[#243f4a]">Tour</h2>
+          <label className="block text-sm font-medium mb-1">Select Tour *</label>
           <select
             required
             disabled={loadingTours}
@@ -107,7 +131,7 @@ export default function SetDateAdmin() {
             onChange={(e) =>
               setSelectedTourId(e.target.value ? Number(e.target.value) : "")
             }
-            className="w-full border rounded-md px-3 py-2 text-sm"
+            className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-[#2fa79a]/30 focus:border-[#2fa79a]"
           >
             <option value="">Select a tour…</option>
             {tours.map((t) => (
@@ -120,100 +144,84 @@ export default function SetDateAdmin() {
 
         {/* SHOWDATE */}
         <div>
-          <h2 className="text-lg font-semibold mb-3">Show Date Details</h2>
+          <h2 className="text-lg font-semibold mb-3 text-[#243f4a]">Show Date Details</h2>
           <div className="grid md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium mb-1">
-                Date (yyyy-mm-dd) *
-              </label>
+              <label className="block text-sm font-medium mb-1">Date (yyyy-mm-dd) *</label>
               <input
                 type="date"
                 required
                 name="date"
-                className="w-full border rounded-md px-3 py-2 text-sm"
+                className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-[#2fa79a]/30 focus:border-[#2fa79a]"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1">
-                Time Slot
-              </label>
+              <label className="block text-sm font-medium mb-1">Time Slot</label>
               <input
                 type="text"
                 name="timeSlot"
                 placeholder="Format 10:00:00"
-                className="w-full border rounded-md px-3 py-2 text-sm"
+                className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-[#2fa79a]/30 focus:border-[#2fa79a]"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-1">
-                City *
-              </label>
+              <label className="block text-sm font-medium mb-1">City *</label>
               <input
                 type="text"
                 required
                 name="city"
-                className="w-full border rounded-md px-3 py-2 text-sm"
+                className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-[#2fa79a]/30 focus:border-[#2fa79a]"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1">
-                State *
-              </label>
+              <label className="block text-sm font-medium mb-1">State *</label>
               <input
                 type="text"
                 required
                 name="state"
-                className="w-full border rounded-md px-3 py-2 text-sm"
+                className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-[#2fa79a]/30 focus:border-[#2fa79a]"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-1">
-                Country *
-              </label>
+              <label className="block text-sm font-medium mb-1">Country *</label>
               <input
                 type="text"
                 required
                 defaultValue="USA"
                 name="country"
-                className="w-full border rounded-md px-3 py-2 text-sm"
+                className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-[#2fa79a]/30 focus:border-[#2fa79a]"
               />
             </div>
 
             <div className="md:col-span-2">
-              <label className="block text-sm font-medium mb-1">
-                Venue Name *
-              </label>
+              <label className="block text-sm font-medium mb-1">Venue Name *</label>
               <input
                 type="text"
                 required
                 name="venueName"
                 placeholder="High School, Theater, etc."
-                className="w-full border rounded-md px-3 py-2 text-sm"
+                className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-[#2fa79a]/30 focus:border-[#2fa79a]"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-1">
-                Venue Type
-              </label>
+              <label className="block text-sm font-medium mb-1">Venue Type</label>
               <input
                 type="text"
                 name="venueType"
                 placeholder="SCHOOL, THEATER, OTHER…"
-                className="w-full border rounded-md px-3 py-2 text-sm"
+                className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-[#2fa79a]/30 focus:border-[#2fa79a]"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-1">
-                Status
-              </label>
+              <label className="block text-sm font-medium mb-1">Status</label>
               <select
                 name="status"
                 defaultValue="OPEN"
-                className="w-full border rounded-md px-3 py-2 text-sm"
+                className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-[#2fa79a]/30 focus:border-[#2fa79a]"
               >
                 <option value="OPEN">OPEN</option>
                 <option value="CLOSED">CLOSED</option>
@@ -223,10 +231,17 @@ export default function SetDateAdmin() {
           </div>
         </div>
 
-        <div className="pt-2">
+        <div className="flex justify-end gap-3 pt-4">
+          <button
+            type="button"
+            onClick={handleCancel}
+            className="px-5 py-2.5 rounded-xl border border-gray-300 text-gray-600 hover:bg-gray-100 transition-all"
+          >
+            Cancel
+          </button>
           <button
             type="submit"
-            className="inline-flex items-center justify-center px-6 py-2.5 rounded-md bg-green-600 text-white text-sm font-semibold hover:bg-green-700 transition"
+            className="px-6 py-2.5 rounded-2xl bg-gradient-to-r from-[#243f4a] to-[#2fa79a] text-white font-semibold shadow hover:scale-[1.02] transition-all"
           >
             Create Show Date
           </button>
