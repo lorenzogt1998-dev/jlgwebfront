@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { adminFetch } from "@/services/api";
+import { Search, Filter, Trash2, Edit3, Plus, X } from "lucide-react";
+import ContactTooltip from "@/components/ContactTooltip";
 
 interface Reservation {
     id: number;
@@ -32,7 +34,7 @@ interface Reservation {
             id: number;
             name: string;
             year: number;
-        }
+        };
     };
 }
 
@@ -41,12 +43,23 @@ export default function ReservationsAdmin() {
     const [loading, setLoading] = useState(true);
 
     const [filterId, setFilterId] = useState("");
-    const [filterShowId, setFilterShowId] = useState("");
+    const [filterShowDate, setFilterShowDate] = useState("");
 
-    // MODAL
     const [editing, setEditing] = useState<Reservation | null>(null);
-    const [newSeatsRequested, setNewSeatsRequested] = useState<number>(0);
-    const [newSeatsConfirmed, setNewSeatsConfirmed] = useState<number>(0);
+    const [deleteId, setDeleteId] = useState<number | null>(null);
+
+    const [successPopup, setSuccessPopup] = useState<{ title: string; message: string } | null>(null);
+
+    // FORMATEO DE FECHAS DD/MM/YYYY
+    const formatDate = (date: string) => {
+        if (!date) return "";
+        const [year, month, day] = date.split("-");
+        return `${day}/${month}/${year}`;
+    };
+
+    useEffect(() => {
+        loadReservations();
+    }, []);
 
     async function loadReservations() {
         setLoading(true);
@@ -59,267 +72,227 @@ export default function ReservationsAdmin() {
         }
     }
 
-    useEffect(() => {
-        loadReservations();
-    }, []);
-
-    //  FILTRO POR ID
     async function filterById() {
         if (!filterId) return loadReservations();
-
         const res = await adminFetch(`http://localhost:8080/api/reservations/${filterId}`);
         const data = await res.json();
         setReservations([data]);
     }
 
-    //  FILTRO POR SHOWDATE
-    async function filterByShow() {
-        if (!filterShowId) return loadReservations();
+    // FILTRADO POR FECHA (DD/MM/YYYY -> YYYY-MM-DD)
+    const filterByShowDate = async () => {
+        if (!filterShowDate) return loadReservations();
 
-        const res = await adminFetch(`http://localhost:8080/api/reservations/by-show/${filterShowId}`);
-        const data = await res.json();
-        setReservations(data);
-    }
+        const parts = filterShowDate.split("/");
+        if (parts.length !== 3) {
+            alert("Formato de fecha incorrecto. Usa DD/MM/YYYY");
+            return;
+        }
 
-    //  ELIMINAR
-    async function deleteReservation(id: number) {
-        if (!confirm("¿Eliminar esta reserva?")) return;
+        const isoDate = `${parts[2]}-${parts[1]}-${parts[0]}`; // YYYY-MM-DD
 
-        await adminFetch(`http://localhost:8080/api/reservations/${id}`, {
-            method: "DELETE",
+        try {
+            const res = await adminFetch(`http://localhost:8080/api/reservations/by-show-date/${isoDate}`);
+            const data = await res.json();
+            setReservations(data);
+        } catch (error) {
+            console.error("Error fetching reservations by date:", error);
+        }
+    };
+
+    async function confirmDelete() {
+        if (deleteId === null) return;
+
+        await adminFetch(`http://localhost:8080/api/reservations/${deleteId}`, { method: "DELETE" });
+        setDeleteId(null);
+
+        setSuccessPopup({
+            title: "Reserva eliminada",
+            message: "La reserva fue eliminada exitosamente.",
         });
+        setTimeout(() => setSuccessPopup(null), 3000);
 
         loadReservations();
     }
 
-    // edicion full de la reserva
-    function openEditModalFull(r: Reservation) {
-        setEditing({ ...r }); // copia
-    }
-
-    //  GUARDAR EDICIÓN
-    async function saveEdit() {
-        if (!editing) return;
-
-        const body = {
-            seatsRequested: newSeatsRequested,
-            seatsConfirmed: newSeatsConfirmed,
-        };
-
-        await adminFetch(`http://localhost:8080/api/reservations/${editing.id}`, {
-            method: "PATCH",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(body),
-        });
-
-        setEditing(null);
-        loadReservations();
-    }
+    const showPopup = (title: string, message: string) => {
+        setSuccessPopup({ title, message });
+        setTimeout(() => setSuccessPopup(null), 3000);
+    };
 
     return (
-        <div className="p-8 pt-28">
+        <div className="min-h-screen bg-gray-50 px-6 py-10 pt-28 flex justify-center">
+            <div className="w-full max-w-7xl">
+                {/* HEADER */}
+                <div className="flex items-center justify-between mb-10">
+                    <div className="flex items-center gap-4">
+                        <div className="w-14 h-14 bg-gradient-to-br from-[#243f4a] to-[#2fa79a] rounded-2xl flex items-center justify-center shadow-md">
+                            <Filter className="w-8 h-8 text-white" />
+                        </div>
+                        <div>
+                            <h1 className="text-3xl font-bold text-[#243f4a]">Reservations Manager</h1>
+                            <p className="text-gray-500 text-sm mt-1">Manejo de todas las reservas</p>
+                        </div>
+                    </div>
 
-            {/* ------ FILTROS ------ */}
-            <div className="mb-6 flex gap-4">
-                <div>
-                    <input
-                        type="text"
-                        placeholder="Filter by Reservation ID"
-                        className="border rounded px-3 py-1"
-                        value={filterId}
-                        onChange={(e) => setFilterId(e.target.value)}
-                    />
-                    <button
-                        onClick={filterById}
-                        className="ml-2 bg-blue-600 text-white px-3 py-1 rounded"
+                    <a
+                        href="http://localhost:5173/posts/reserveTicket/admin"
+                        className="flex items-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-[#243f4a] to-[#2fa79a] text-white font-semibold shadow hover:scale-[1.02] transition"
                     >
-                        Search
-                    </button>
+                        <Plus className="w-5 h-5" /> Crear reserva
+                    </a>
                 </div>
 
-                <div>
-                    <input
-                        type="text"
-                        placeholder="Filter by ShowDate ID"
-                        className="border rounded px-3 py-1"
-                        value={filterShowId}
-                        onChange={(e) => setFilterShowId(e.target.value)}
-                    />
-                    <button
-                        onClick={filterByShow}
-                        className="ml-2 bg-green-600 text-white px-3 py-1 rounded"
-                    >
-                        Search
-                    </button>
+                {/* FILTERS */}
+                <div className="bg-white/80 backdrop-blur-sm border border-gray-100 rounded-3xl shadow p-6 mb-10">
+                    <div className="flex flex-wrap justify-center gap-4 items-end">
+                        {/* FILTER BY ID */}
+                        <div className="relative w-full md:w-64">
+                            <input
+                                type="text"
+                                placeholder="Filtrar por ID de reserva..."
+                                onKeyDown={(e) => {
+                                    if (e.key === "Enter") filterByShowDate();
+                                }}
+                                value={filterId}
+                                onChange={(e) => setFilterId(e.target.value)}
+                                className="w-full border border-gray-300 rounded-xl py-2 px-4 pl-10 text-sm focus:outline-none focus:ring-2 focus:ring-[#2fa79a] focus:border-transparent"
+                            />
+                            <Search
+                                onClick={filterById}
+                                className="absolute left-3 top-2.5 w-5 h-5 text-gray-400 cursor-pointer"
+                            />
+                        </div>
+
+                        {/* FILTER BY SHOW DATE */}
+                        <div className="relative w-full md:w-64">
+                            <input
+                                type="text"
+                                placeholder="Filtrar por fecha del show (DD/MM/YYYY)"
+                                onKeyDown={(e) => {
+                                    if (e.key === "Enter") filterByShowDate();
+                                }}
+                                value={filterShowDate}
+                                onChange={(e) => setFilterShowDate(e.target.value)}
+                                className="w-full border border-gray-300 rounded-xl py-2 px-4 pl-10 text-sm focus:outline-none focus:ring-2 focus:ring-[#2fa79a] focus:border-transparent"
+                            />
+                            <Search
+                                onClick={filterByShowDate}
+                                className="absolute left-3 top-2.5 w-5 h-5 text-gray-400 cursor-pointer"
+                            />
+                        </div>
+
+                        {/* RESET FILTERS */}
+                        <div className="w-full md:w-auto flex justify-center">
+                            <button
+                                onClick={() => {
+                                    setFilterId("");           // Borra el filtro por ID
+                                    setFilterShowDate("");     // Borra el filtro por fecha
+                                    loadReservations();        // Recarga todas las reservas
+                                }}
+                                className="w-full md:w-auto px-4 py-2 rounded-xl bg-gray-200 text-gray-700 text-sm font-semibold hover:bg-gray-300 transition"
+                            >
+                                Reset Filters
+                            </button>
+
+                        </div>
+                    </div>
                 </div>
 
-                <button
-                    onClick={loadReservations}
-                    className="bg-gray-500 text-white px-3 py-1 rounded"
-                >
-                    Reset
-                </button>
-            </div>
+                {/* TABLE */}
+                <div className="bg-white/80 backdrop-blur-sm border border-gray-100 rounded-3xl shadow-lg p-6">
+                    <table className="w-full border-collapse">
+                        <thead>
+                            <tr className="border-b border-gray-200">
+                                <th className="py-3 px-4 text-sm font-semibold text-[#243f4a]">ID</th>
+                                <th className="py-3 px-4 text-sm font-semibold text-[#243f4a]">Contact</th>
+                                <th className="py-3 px-4 text-sm font-semibold text-[#243f4a]">Organization</th>
+                                <th className="py-3 px-4 text-sm font-semibold text-[#243f4a]">Seats Requested</th>
+                                <th className="py-3 px-4 text-sm font-semibold text-[#243f4a]">Seats Confirmed</th>
+                                <th className="py-3 px-4 text-sm font-semibold text-[#243f4a]">Show Date</th>
+                                <th className="py-3 px-4 text-sm font-semibold text-[#243f4a]">Tour</th>
+                                <th className="py-3 px-4 text-center text-sm font-semibold text-[#243f4a]">Actions</th>
+                            </tr>
+                        </thead>
 
-            {/* ------ TABLA ------ */}
-            <table className="w-full bg-white shadow rounded border">
-                <thead>
-                    <tr className="border-b bg-slate-100">
-                        <th className="p-2">ID</th>
-                        <th className="p-2">Contact</th>
-                        <th className="p-2">Organization</th>
-                        <th className="p-2">Seats Req.</th>
-                        <th className="p-2">Seats Conf.</th>
-                        <th className="p-2">ShowDate</th>
-                        <th className="p-2">Actions</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-                    {reservations.map((r) => (
-                        <tr key={r.id} className="border-b hover:bg-slate-50">
-                            <td className="p-2">{r.id}</td>
-                            <td className="p-2">
-                                {r.contactName} <br />
-                                {r.contactEmail}
-                            </td>
-                            <td className="p-2">{r.organizationName}</td>
-                            <td className="p-2">{r.seatsRequested}</td>
-                            <td className="p-2">{r.seatsConfirmed}</td>
-                            <td className="p-2">{r.showDate.id}</td>
-
-                            <td className="p-2 flex gap-2">
-                                <button
-                                    onClick={() => openEditModalFull(r)}
-                                    className="px-2 py-1 bg-purple-600 text-white rounded"
+                        <tbody>
+                            {reservations.map((r, i) => (
+                                <tr
+                                    key={r.id}
+                                    className={`${i % 2 === 0 ? "bg-white" : "bg-gray-50/60"} hover:bg-[#2fa79a]/10 transition`}
                                 >
-                                    Edit Full
-                                </button>
+                                    <td className="py-3 px-4 text-sm">{r.id}</td>
+                                    <td className="p-2">
+                                        <ContactTooltip name={r.contactName} email={r.contactEmail} phone={r.contactPhone} />
+                                    </td>
+                                    <td className="py-3 px-4 text-sm">{r.organizationName}</td>
+                                    <td className="py-3 px-4 text-sm">{r.seatsRequested}</td>
+                                    <td className="py-3 px-4 text-sm">{r.seatsConfirmed ?? "-"}</td>
+                                    <td className="py-3 px-4 text-sm">{formatDate(r.showDate.date)}</td>
+                                    <td className="py-3 px-4 text-sm text-gray-700">{r.showDate.tour.name}</td>
+                                    <td className="py-3 px-4 flex gap-2 justify-center">
+                                        <button
+                                            onClick={() => setEditing(r)}
+                                            className="px-3 py-2 rounded-lg bg-[#243f4a]/15 text-[#243f4a] hover:bg-[#243f4a]/25 transition flex items-center gap-1"
+                                        >
+                                            <Edit3 className="w-4 h-4" /> Edit
+                                        </button>
+                                        <button
+                                            onClick={() => setDeleteId(r.id)}
+                                            className="px-3 py-2 rounded-lg bg-[#df6a47]/15 text-[#df6a47] hover:bg-[#df6a47]/25 transition flex items-center gap-1"
+                                        >
+                                            <Trash2 className="w-4 h-4" /> Delete
+                                        </button>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
 
-                                <button
-                                    onClick={() => deleteReservation(r.id)}
-                                    className="px-2 py-1 bg-red-600 text-white rounded"
-                                >
-                                    Delete
-                                </button>
-                            </td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
-
-            {/* --- MODAL EDICIÓN COMPLETA --- */}
-{editing && (
-    <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center">
-        <div className="bg-white p-6 rounded shadow-xl w-[500px]">
-            <h2 className="text-xl font-bold mb-4">
-                Edit Full Reservation #{editing.id}
-            </h2>
-
-            <div className="grid grid-cols-1 gap-3">
-
-                <input
-                    className="border p-2 rounded"
-                    placeholder="Organization Name"
-                    defaultValue={editing.organizationName}
-                    onChange={(e) => editing.organizationName = e.target.value}
-                />
-
-                <input
-                    className="border p-2 rounded"
-                    placeholder="Contact Name"
-                    defaultValue={editing.contactName}
-                    onChange={(e) => editing.contactName = e.target.value}
-                />
-
-                <input
-                    className="border p-2 rounded"
-                    placeholder="Email"
-                    defaultValue={editing.contactEmail}
-                    onChange={(e) => editing.contactEmail = e.target.value}
-                />
-
-                <input
-                    className="border p-2 rounded"
-                    placeholder="Phone"
-                    defaultValue={editing.contactPhone}
-                    onChange={(e) => editing.contactPhone = e.target.value}
-                />
-
-                <input
-                    className="border p-2 rounded"
-                    placeholder="City"
-                    defaultValue={editing.city || ""}
-                    onChange={(e) => editing.city = e.target.value}
-                />
-
-                <input
-                    className="border p-2 rounded"
-                    placeholder="State"
-                    defaultValue={editing.state || ""}
-                    onChange={(e) => editing.state = e.target.value}
-                />
-
-                <input
-                    className="border p-2 rounded"
-                    placeholder="Grades"
-                    defaultValue={editing.grades || ""}
-                    onChange={(e) => editing.grades = e.target.value}
-                />
-
-                <textarea
-                    className="border p-2 rounded"
-                    placeholder="Notes"
-                    defaultValue={editing.notes || ""}
-                    onChange={(e) => editing.notes = e.target.value}
-                />
-
-                <input
-                    type="number"
-                    className="border p-2 rounded"
-                    placeholder="Seats Requested"
-                    defaultValue={editing.seatsRequested}
-                    onChange={(e) => editing.seatsRequested = Number(e.target.value)}
-                />
-
-                <input
-                    type="number"
-                    className="border p-2 rounded"
-                    placeholder="Seats Confirmed"
-                    defaultValue={editing.seatsConfirmed || 0}
-                    onChange={(e) => editing.seatsConfirmed = Number(e.target.value)}
-                />
-
+                <p className="text-xs text-gray-400 text-center mt-8">Sistema de administración</p>
             </div>
 
-            {/* Buttons */}
-            <div className="flex justify-end gap-3 mt-5">
-                <button
-                    onClick={() => setEditing(null)}
-                    className="px-3 py-1 bg-gray-400 text-white rounded"
-                >
-                    Cancel
-                </button>
+            {/* POPUPS & MODALS */}
+            {successPopup && (
+                <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-[999] px-4">
+                    <div className="bg-white rounded-3xl shadow-xl p-8 w-full max-w-sm border border-gray-100 relative text-center">
+                        <h2 className="text-xl font-bold text-[#243f4a] mb-4">{successPopup.title}</h2>
+                        <p className="text-gray-600 text-sm mb-6">{successPopup.message}</p>
+                        <div className="flex justify-center">
+                            <button
+                                onClick={() => setSuccessPopup(null)}
+                                className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-[#243f4a] to-[#2fa79a] text-white font-semibold shadow hover:scale-[1.02] transition"
+                            >
+                                OK
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
 
-                <button
-                    onClick={async () => {
-                        await adminFetch(`http://localhost:8080/api/reservations/${editing.id}/full`, {
-                            method: "PATCH",
-                            headers: { "Content-Type": "application/json" },
-                            body: JSON.stringify(editing),
-                        });
-
-                        setEditing(null);
-                        loadReservations();
-                    }}
-                    className="px-3 py-1 bg-blue-600 text-white rounded"
-                >
-                    Save
-                </button>
-            </div>
-        </div>
-    </div>
-)}
+            {deleteId !== null && (
+                <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50 px-4">
+                    <div className="bg-white rounded-3xl shadow-xl p-8 w-full max-w-sm border border-gray-100 relative">
+                        <h2 className="text-xl font-bold text-[#243f4a] mb-4 text-center">Confirmar Eliminación</h2>
+                        <p className="text-gray-600 text-sm text-center mb-6">¿Seguro que deseas eliminar esta reserva?</p>
+                        <div className="flex justify-center gap-4">
+                            <button
+                                onClick={() => setDeleteId(null)}
+                                className="px-5 py-2.5 rounded-xl border border-gray-300 text-gray-600 hover:bg-gray-100 transition"
+                            >
+                                Cancelar
+                            </button>
+                            <button
+                                onClick={confirmDelete}
+                                className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-[#df6a47] to-[#f58c6c] text-white font-semibold shadow hover:scale-[1.02] transition"
+                            >
+                                Eliminar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }
