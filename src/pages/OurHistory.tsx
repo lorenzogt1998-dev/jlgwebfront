@@ -22,27 +22,22 @@ export default function OurHistory() {
 
             <div className="w-full md:w-[45%] p-8 md:p-12 flex flex-col justify-center text-white">
               <h2 className="text-3xl md:text-4xl font-extrabold tracking-wide uppercase text-[#ddad0d]"
-              style={{ fontFamily: "'Cinzel', serif" }}>
+                style={{ fontFamily: "'Cinzel', serif" }}>
                 Our History
               </h2>
               <p className="mt-4 text-sm md:text-base leading-relaxed text-slate-100">
-                Justo Lamas Group comenzó llevando la música en español a las
-                aulas de Estados Unidos. Conciertos, giras educativas y recursos
-                para profesores han inspirado a miles de estudiantes a amar el
-                idioma y la cultura.
+                Justo Lamas Group began by bringing Spanish-language music into classrooms across the United States. Concerts, educational tours, and teacher resources have inspired thousands of students to love the language and the culture.
               </p>
               <p className="mt-3 text-sm md:text-base leading-relaxed text-slate-100">
-                Hoy seguimos creciendo, conectando escuelas, artistas y
-                comunidades a través de experiencias que combinan música,
-                idioma y valores.
+                Today, we continue to grow, connecting schools, artists, and communities through experiences that combine music, language, and values.
               </p>
 
               <div className="justify-center flex flex-wrap gap-4">
                 <a
                   href="about"
                   className="mt-6 inline-block bg-[#8d8553] hover:bg-[#68602e] px-6 py-3 text-sm font-semibold tracking-wide rounded"
-              >
-               Discover our History
+                >
+                  Discover our History
                 </a>
               </div>
             </div>

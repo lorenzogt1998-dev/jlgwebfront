@@ -23,7 +23,7 @@ export default function OurMusic() {
 
             <div className="w-full md:w-[45%] p-8 md:p-12 flex flex-col justify-center text-white">
               <h2 className="text-3xl md:text-4xl font-extrabold tracking-wide uppercase text-[#ddad0d]"
-              style={{ fontFamily: "'Cinzel', serif" }}>
+                style={{ fontFamily: "'Cinzel', serif" }}>
                 Our Music and Activities
               </h2>
               <p className="mt-4 text-sm md:text-base leading-relaxed text-slate-100">
@@ -32,9 +32,8 @@ export default function OurMusic() {
                 classroom and share the joy of learning through music.
               </p>
               <p className="mt-3 text-sm md:text-base leading-relaxed text-slate-100">
-                Hoy seguimos creciendo, conectando escuelas, artistas y
-                comunidades a través de experiencias que combinan música,
-                idioma y valores.
+                Here you can explore more of our music, discover classroom activities, and
+                enjoy resources designed to make Spanish learning unforgettable.
               </p>
 
               <div className="justify-center flex flex-wrap gap-4">

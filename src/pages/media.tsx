@@ -15,15 +15,15 @@ const songs: Song[] = [
     id: 1,
     title: "PERDER EL CONTROL",
     artist: "Justo Lamas Group",
-    src: "/audios/perder-el-control-master.wav",          // 👈 ajustá nombre de archivo
-    cover: "/images/fue-un-error-portada.jpeg",
+    src: "/audios/perder-el-control-master.wav",        
+    cover: "/images/fue-un-error-portada-vacia.jpeg",
   },
   {
     id: 2,
     title: "FUE UN ERROR",
     artist: "Justo Lamas Group",
-    src: "/audios/fue-un-error.mp4",          // 👈 ajustá nombre de archivo
-    cover: "/images/fue-un-error-portada.jpeg",
+    src: "/audios/fue-un-error.mp4",       
+    cover: "/images/fue-un-error-portada-vacia.jpeg",
   },
 ];
 
