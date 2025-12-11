@@ -17,7 +17,7 @@ export default function ReserveTicket() {
   useEffect(() => {
     async function loadDates() {
       try {
-        const resp = await fetch("http://localhost:8080/api/show-dates/open");
+        const resp = await fetch("/api/show-dates/open");
         if (!resp.ok) throw new Error("Error loading open show dates");
 
         const data: ShowDate[] = await resp.json();
@@ -52,7 +52,7 @@ export default function ReserveTicket() {
     };
 
     try {
-      const resp = await fetch("http://localhost:8080/api/reservations", {
+      const resp = await fetch("/api/reservations", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),

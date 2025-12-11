@@ -21,7 +21,7 @@ export default function SetDateAdmin() {
     async function loadTours() {
       try {
         setLoadingTours(true);
-        const resp = await adminFetch("http://localhost:8080/api/tours");
+        const resp = await adminFetch("/api/tours");
         if (!resp.ok) throw new Error("Error loading tours");
         const data = await resp.json();
         setTours(data);
@@ -57,8 +57,7 @@ export default function SetDateAdmin() {
     };
 
     try {
-      const resp = await adminFetch(
-        `http://localhost:8080/api/show-dates/${selectedTourId}`,
+      const resp = await adminFetch(`/api/show-dates/${selectedTourId}`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

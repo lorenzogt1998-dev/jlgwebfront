@@ -1,5 +1,7 @@
 import React from "react";
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 export default function SetDate() {
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -20,7 +22,7 @@ export default function SetDate() {
     };
 
     try {
-      const resp = await fetch("http://localhost:8080/api/leads/set-date", {
+      const resp = await fetch(`${API_BASE_URL}/api/leads/set-date`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),

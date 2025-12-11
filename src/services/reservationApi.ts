@@ -7,7 +7,7 @@ export async function createReservation(data: {
   contactPhone: string;
   seatsRequested: number;
 }) {
-  const res = await fetch("http://localhost:8080/api/reservations", {
+  const res = await fetch("/api/reservations", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({

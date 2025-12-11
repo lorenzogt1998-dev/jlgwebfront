@@ -21,7 +21,7 @@ export default function ToursListAdmin() {
   useEffect(() => {
     async function fetchTours() {
       try {
-        const resp = await adminFetch("http://localhost:8080/api/tours");
+        const resp = await adminFetch("/api/tours");
         if (!resp.ok) throw new Error("Error loading tours");
 
         const data = await resp.json();
@@ -46,7 +46,7 @@ export default function ToursListAdmin() {
     if (deleteTourId === null) return;
 
     try {
-      const resp = await adminFetch(`http://localhost:8080/api/tours/${deleteTourId}`, {
+      const resp = await adminFetch(`/api/tours/${deleteTourId}`, {
         method: "DELETE",
       });
 
@@ -75,7 +75,7 @@ export default function ToursListAdmin() {
     if (!editingTour) return;
 
     try {
-      const resp = await adminFetch(`http://localhost:8080/api/tours/${editingTour.id}`, {
+      const resp = await adminFetch(`/api/tours/${editingTour.id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(editingTour),

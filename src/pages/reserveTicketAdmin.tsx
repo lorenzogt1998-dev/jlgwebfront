@@ -31,7 +31,7 @@ export default function ReserveTicketAdmin() {
         setLoadingDates(true);
 
         // ⬇️ AHORA CON adminFetch (lleva Authorization)
-        const resp = await adminFetch("http://localhost:8080/api/show-dates");
+        const resp = await adminFetch("/api/show-dates");
         if (!resp.ok) throw new Error("Error loading show dates");
 
         const data = await resp.json();
@@ -67,7 +67,7 @@ export default function ReserveTicketAdmin() {
 
     try {
       // ⬇️ TAMBIÉN adminFetch PARA EL POST
-      const resp = await adminFetch("http://localhost:8080/api/reservations", {
+      const resp = await adminFetch("/api/reservations", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),

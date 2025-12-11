@@ -9,7 +9,7 @@ export async function createShowDate(data: {
   timeSlot: string;
   status: string;
 }) {
-  const res = await fetch("http://localhost:8080/api/show-dates", {
+  const res = await fetch("/api/show-dates", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),

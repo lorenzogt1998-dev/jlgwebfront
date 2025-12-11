@@ -64,7 +64,7 @@ export default function ReservationsAdmin() {
     async function loadReservations() {
         setLoading(true);
         try {
-            const res = await adminFetch("http://localhost:8080/api/reservations");
+            const res = await adminFetch("/api/reservations");
             const data = await res.json();
             setReservations(data);
         } finally {
@@ -74,7 +74,7 @@ export default function ReservationsAdmin() {
 
     async function filterById() {
         if (!filterId) return loadReservations();
-        const res = await adminFetch(`http://localhost:8080/api/reservations/${filterId}`);
+        const res = await adminFetch(`/api/reservations/${filterId}`);
         const data = await res.json();
         setReservations([data]);
     }
@@ -92,7 +92,7 @@ export default function ReservationsAdmin() {
         const isoDate = `${parts[2]}-${parts[1]}-${parts[0]}`; // YYYY-MM-DD
 
         try {
-            const res = await adminFetch(`http://localhost:8080/api/reservations/by-show-date/${isoDate}`);
+            const res = await adminFetch(`/api/reservations/by-show-date/${isoDate}`);
             const data = await res.json();
             setReservations(data);
         } catch (error) {
@@ -103,7 +103,7 @@ export default function ReservationsAdmin() {
     async function confirmDelete() {
         if (deleteId === null) return;
 
-        await adminFetch(`http://localhost:8080/api/reservations/${deleteId}`, { method: "DELETE" });
+        await adminFetch(`/api/reservations/${deleteId}`, { method: "DELETE" });
         setDeleteId(null);
 
         setSuccessPopup({

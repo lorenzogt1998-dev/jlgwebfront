@@ -52,9 +52,9 @@ export default function AdminDashboard() {
     async function loadAll() {
       try {
         const [toursResp, showsResp, reservResp] = await Promise.all([
-          adminFetch("http://localhost:8080/api/tours"),
-          adminFetch("http://localhost:8080/api/show-dates"),
-          adminFetch("http://localhost:8080/api/reservations"),
+          adminFetch("api/tours"),
+          adminFetch("/api/show-dates"),
+          adminFetch("/api/reservations"),
         ])
 
         const [toursJson, showsJson, reservJson] = await Promise.all([
@@ -130,7 +130,7 @@ export default function AdminDashboard() {
     try {
       setDeletingId(id)
 
-      const resp = await adminFetch(`http://localhost:8080/api/show-dates/${id}`, { method: "DELETE" })
+      const resp = await adminFetch(`/api/show-dates/${id}`, { method: "DELETE" })
 
       if (!resp.ok) {
         throw new Error("Failed to delete show date")
@@ -154,7 +154,7 @@ export default function AdminDashboard() {
     try {
       setSavingStatusId(id)
 
-      const resp = await adminFetch(`http://localhost:8080/api/show-dates/${id}/status`, {
+      const resp = await adminFetch(`/api/show-dates/${id}/status`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ status }),
@@ -181,7 +181,7 @@ export default function AdminDashboard() {
     try {
       setDeletingReservationId(id)
 
-      const resp = await adminFetch(`http://localhost:8080/api/reservations/${id}`, {
+      const resp = await adminFetch(`/api/reservations/${id}`, {
         method: "DELETE",
       })
 
@@ -211,7 +211,7 @@ export default function AdminDashboard() {
     try {
       setSavingSeatsId(id)
 
-      const resp = await adminFetch(`http://localhost:8080/api/reservations/${id}`, {
+      const resp = await adminFetch(`/api/reservations/${id}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

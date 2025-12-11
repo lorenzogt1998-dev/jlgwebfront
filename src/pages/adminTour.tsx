@@ -29,7 +29,7 @@ export default function AdminTour() {
     };
 
     try {
-      const resp = await adminFetch("http://localhost:8080/api/tours", {
+      const resp = await adminFetch("/api/tours", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),

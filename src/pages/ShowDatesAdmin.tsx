@@ -46,7 +46,7 @@ const ShowDatesAdmin: React.FC = () => {
 
     const fetchShowDates = async () => {
         try {
-            const res = await adminFetch("http://localhost:8080/api/show-dates", {
+            const res = await adminFetch("/api/show-dates", {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -92,7 +92,7 @@ const ShowDatesAdmin: React.FC = () => {
     const handleDelete = async (id: number) => {
         if (!window.confirm("Are you sure you want to delete this show date?")) return;
         try {
-            await adminFetch(`http://localhost:8080/api/show-dates/${id}`, {
+            await adminFetch(`/api/show-dates/${id}`, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",
@@ -110,7 +110,7 @@ const ShowDatesAdmin: React.FC = () => {
         if (!currentShow) return;
         const newStatus = currentShow.status === "OPEN" ? "CLOSED" : "OPEN";
         try {
-            const res = await adminFetch(`http://localhost:8080/api/show-dates/${id}/status`, {
+            const res = await adminFetch(`/api/show-dates/${id}/status`, {
                 method: "PATCH",
                 headers: {
                     "Content-Type": "application/json",
