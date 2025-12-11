@@ -23,21 +23,25 @@ export default function About() {
           "Our vision is rooted in positivity, inclusion, and personal growth — values that have inspired hundreds of thousands of students across the country.",
         ]}
       />
-
-      {/* ABOUT PROGRAM */}
-      <SplitSection
-        title="About the Program"
-        text={[
-          "The Justo Lamas educational program brings the Spanish classroom to life through music, culture, and real human connection.",
-          "",
-          "• How long is the presentation? — Typically 60 to 75 minutes.",
-          "• Who is it for? — Middle school, high school, and Spanish learners of all levels.",
-          "• What is the goal? — To inspire students to continue learning the language.",
-          "• What makes it unique? — Live music, emotional storytelling, student participation, and messages of empathy and inclusion.",
-        ]}
-        image="/images/12J.LAMAS-WEB.jpg"
-        flip={false}
-      />
+{/* ABOUT PROGRAM */}
+<SplitSection
+  title="About the Program"
+  text={[
+    "The Justo Lamas Group program promotes Spanish learning through live music and meaningful cultural experiences. Since 1998, the program has inspired thousands of students across the U.S., making Spanish exciting and accessible.",
+    "",
+    "• Students learn about Latin American culture and modern Spanish-speaking youth.",
+    "• They gain useful vocabulary and language structures in a fun, engaging way.",
+    "• The concert encourages empathy, inclusion, and motivation to pursue their dreams.",
+    "• It also helps students view their own culture from a new perspective.",
+    "",
+    "Our shows last about 90 minutes and combine Latin pop, rock, and traditional music with strong student interaction.",
+    "The performance is both entertaining and educational—an extension of the classroom.",
+    "Lyrics, lessons, and karaoke are available online so students can learn songs beforehand and sing along.",
+    "After the concert, students meet the artist, take photos, get autographs, and enjoy a personal cultural exchange."
+  ]}
+  image="/images/12J.LAMAS-WEB.jpg"
+  flip={false}
+/>
 
       {/* MANU */}
       <SplitSection
