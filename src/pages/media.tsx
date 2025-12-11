@@ -240,7 +240,7 @@ export default function MediaPage() {
       <div className="grid gap-10 lg:grid-cols-[minmax(0,1.7fr)_minmax(0,1.1fr)] items-start">
         {/* 🎵 COLUMNA IZQUIERDA: PLAYLIST */}
         <section id="playlist">
-          
+
 
           {songs.map((song) => (
             <SongCard
@@ -315,10 +315,31 @@ export default function MediaPage() {
 
           {/* Nota al pie */}
           <p className="mt-5 text-[11px] text-slate-400 text-center lg:text-left">
-            * PDFs coming soon. You&apos;ll be able to download the complete
-            lyric sheets and activities for each song on the Legado Tour.
+            {/* texto? */}
           </p>
+          {/* CARD FINAL – MORE COMING SOON */}
+          <div className="mt-16 max-w-xl mx-auto">
+            <div className="rounded-3xl bg-gradient-to-b from-neutral-900 via-neutral-950 to-black border border-yellow-500/40 shadow-xl px-6 py-8 text-center">
+
+              <h3 className="text-xl font-extrabold text-yellow-300 tracking-wide drop-shadow-[0_2px_4px_rgba(0,0,0,0.7)]">
+                More Music & Activities Coming Soon
+              </h3>
+
+              <p className="text-sm text-slate-300 mt-3 leading-relaxed">
+                We’re preparing new songs, lyric sheets, and exciting classroom activities
+                to continue supporting Spanish learning through music. Stay tuned!
+              </p>
+
+              <div className="mt-6">
+                <span className="inline-block px-5 py-2 rounded-full bg-yellow-400 text-black text-xs font-semibold shadow-md">
+                  Season update
+                </span>
+              </div>
+            </div>
+          </div>
+
         </aside>
+
       </div>
     </div>
   );
