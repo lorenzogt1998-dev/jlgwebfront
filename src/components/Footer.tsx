@@ -9,7 +9,7 @@ export default function Footer() {
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
           <section>
-            <h3 className="text-base font-semibold text-slate-900">About</h3>
+            <h3 className="text-base font-semibold text-slate-900">About Us</h3>
             <p className="mt-3 text-sm leading-6 text-slate-600">
               Breve descripción del programa o links destacados.
             </p>
@@ -19,15 +19,16 @@ export default function Footer() {
             <h3 className="text-base font-semibold text-slate-900">Resources</h3>
             <ul className="mt-3 space-y-2 text-sm">
               <li><NavLink className="text-slate-600 hover:text-sky-700" to="/downloads">Downloads</NavLink></li>
-              <li><NavLink className="text-slate-600 hover:text-sky-700" to="/media">Media</NavLink></li>
+              <li><NavLink className="text-slate-600 hover:text-sky-700" to="/media">Music</NavLink></li>
               <li><NavLink className="text-slate-600 hover:text-sky-700" to="/teachers">For Teachers</NavLink></li>
             </ul>
           </section>
 
           <section>
-            <h3 className="text-base font-semibold text-slate-900">Contact</h3>
+            <h3 className="text-base font-semibold text-slate-900">Contact Us</h3>
             <p className="mt-3 text-sm text-slate-600">
-              concerts@justolamasgroup.com<br/>USA
+              concerts@justolamasgroup.com<br />Only Text message ‪(682) 710-1443<br />Whats app +54 11-5045-5615
+              
             </p>
           </section>
         </div>

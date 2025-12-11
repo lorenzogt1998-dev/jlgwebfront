@@ -6,8 +6,8 @@ export function HeroSlider() {
   const slides = [
     { id: 1, img: "/images/222.png", alt: "Slide 1", link: "/tour" },
     { id: 2, img: "/images/yt.png", alt: "Slide 2", link: "https://www.youtube.com/@SILVER-oficial-1" },
-    { id: 3, img: "/images/emanuel_carrusel_1600.jpg", alt: "Slide 3", link: "/media" },
-    { id: 4, img: "/images/4.jpeg", alt: "Slide 4", link: "/posts/reserveTicket" },
+    { id: 3, img: "/images/lyries.png", alt: "Slide 3", link: "/media" },
+    { id: 4, img: "/images/ticket.png", alt: "Slide 4", link: "/posts/reserveTicket" },
   ];
 
   return (

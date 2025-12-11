@@ -1,7 +1,7 @@
 // Header.tsx
 import { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-import { Instagram, Youtube, Music } from "lucide-react";
+import { Instagram, Youtube, Music, LogIn } from "lucide-react";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
@@ -46,17 +46,17 @@ export default function Header() {
             <NavLink to="/about" className="hover:text-sky-400">About Us</NavLink>
             <NavLink to="/services" className="hover:text-sky-400">Services</NavLink>
             <NavLink to="/tour" className="hover:text-sky-400">Tour</NavLink>
-            <NavLink to="/media" className="hover:text-sky-400">Media</NavLink>
-            <NavLink to="/contact" className="hover:text-sky-400">Contact</NavLink>
+            <NavLink to="/media" className="hover:text-sky-400">Music</NavLink>
+            <NavLink to="/contact" className="hover:text-sky-400">Contact Us</NavLink>
           </nav>
 
           {/* CTA + burger */}
           <div className="flex items-center gap-3">
             <a
               href="/admin/login"
-              className="hidden md:inline-flex rounded-md bg-sky-500 px-4 py-2 text-sm font-semibold text-white shadow hover:bg-sky-600"
+              className="hidden md:inline-flex items-center justify-center rounded-md p-2 text-slate-700 hover:text-sky-600 transition"
             >
-              Dashboard
+              <LogIn size={30} />
             </a>
             <button
               onClick={() => setOpen(!open)}
@@ -71,13 +71,13 @@ export default function Header() {
       {open && (
         <div className="md:hidden bg-neutral-900 border-b border-slate-800">
           <div className="mx-auto max-w-7xl px-4 lg:px-8 py-3 flex flex-col gap-3 text-sm">
-            <NavLink to="/artists" className="hover:text-sky-400">Artists</NavLink>
+            <NavLink to="/about" className="hover:text-sky-400">About Us</NavLink>
             <NavLink to="/services" className="hover:text-sky-400">Services</NavLink>
-            <NavLink to="/testimonials" className="hover:text-sky-400">Testimonials</NavLink>
-            <NavLink to="/media" className="hover:text-sky-400">Media</NavLink>
-            <NavLink to="/contact" className="hover:text-sky-400">Contact</NavLink>
+            <NavLink to="/tour" className="hover:text-sky-400">Tour</NavLink>
+            <NavLink to="/media" className="hover:text-sky-400">Music</NavLink>
+            <NavLink to="/contact" className="hover:text-sky-400">Contact Us</NavLink>
             <a href="/tour" className="mt-2 inline-flex w-full justify-center rounded-md bg-sky-500 px-3 py-2 font-semibold hover:bg-sky-600">
-              Book a Show
+              .
             </a>
           </div>
         </div>
