@@ -52,7 +52,7 @@ export default function AdminDashboard() {
     async function loadAll() {
       try {
         const [toursResp, showsResp, reservResp] = await Promise.all([
-          adminFetch("api/tours"),
+          adminFetch("/api/tours"),
           adminFetch("/api/show-dates"),
           adminFetch("/api/reservations"),
         ])
