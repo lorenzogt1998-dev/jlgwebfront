@@ -44,7 +44,7 @@ export default function Header() {
           {/* Desktop menu */}
           <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
             <NavLink to="/about" className="hover:text-sky-400">About Us</NavLink>
-            <NavLink to="/services" className="hover:text-sky-400">Services</NavLink>
+            <NavLink to="/services" className="hover:text-sky-400">Karaoke</NavLink>
             <NavLink to="/tour" className="hover:text-sky-400">Tour</NavLink>
             <NavLink to="/media" className="hover:text-sky-400">Music</NavLink>
             <NavLink to="/contact" className="hover:text-sky-400">Contact Us</NavLink>

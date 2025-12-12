@@ -6,7 +6,7 @@ export default function SidebarHome() {
       title: "KARAOKE",
       text: "Stay in style worldwide.",
       img: "https://upload.wikimedia.org/wikipedia/commons/8/8a/Microphone_on_a_karaoke_night_%28Unsplash%29.jpg",
-      button: "Service",
+      button: "Karaoke",
       link: "/services",
     },
     {
@@ -14,7 +14,7 @@ export default function SidebarHome() {
       title: "TOURS",
       text: "Legendary dining, local flavors.",
       img: "/images/Guitar-tabs.jpg",
-      button: "Views of Tours",
+      button: "Tour Dates",
       link: "/tour",
     },
     {
