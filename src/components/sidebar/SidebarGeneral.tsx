@@ -11,6 +11,12 @@ export default function SidebarGeneral() {
           <a href="mailto:concerts@justolamasgroup.com" className="text-blue-500">
             concerts@justolamasgroup.com
           </a>
+          <a href="mailto:concerts@justolamasgroup.com" className="text-blue-500">
+            Only Text message ‪(682) 710-1443
+          </a>
+          <a href="mailto:concerts@justolamasgroup.com" className="text-blue-500">
+            Whats app +54 11-5045-5615
+          </a>
         </p>
       ),
     },

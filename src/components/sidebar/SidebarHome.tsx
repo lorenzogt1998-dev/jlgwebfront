@@ -19,7 +19,7 @@ export default function SidebarHome() {
     },
     {
       id: 3,
-      title: "CONTACT",
+      title: "CONTACT US",
       text: "Experience the excitement of music and learning.",
       img: "/images/smartphone_mobile_phone_social_media_icon_phone_button_communication_cellular_technology_screen_company-1086716.jpg",
       button: "Contact",
@@ -32,7 +32,7 @@ export default function SidebarHome() {
       <div className="max-w-6xl mx-auto px-4 text-center">
         {/* Título */}
         <h2 className="text-3xl md:text-4xl font-extrabold text-gray-800 uppercase">
-          Experience Justo Lamas Group
+          Justo Lamas Group Experience
         </h2>
         <p className="mt-3 text-gray-600 text-sm md:text-base max-w-2xl mx-auto">
           From unforgettable concerts to inspiring classrooms and cultural exchange,
