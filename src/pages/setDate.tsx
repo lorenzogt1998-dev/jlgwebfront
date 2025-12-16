@@ -2,6 +2,8 @@ import React from "react";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
+console.log("API BASE URL =", API_BASE_URL);
+
 export default function SetDate() {
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
