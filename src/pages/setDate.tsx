@@ -116,6 +116,7 @@ export default function SetDate() {
                 </label>
                 <input
                   type="text"
+                  placeholder="Granville High School"
                   required
                   className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-[#2fa79a]/30 focus:border-[#2fa79a]"
                   name="school"
@@ -129,6 +130,7 @@ export default function SetDate() {
                 <input
                   type="text"
                   required
+                  placeholder="Ex: 248 New Burg Street, Granville, OH, ZIP 43023"
                   className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-[#2fa79a]/30 focus:border-[#2fa79a]"
                   name="address"
                 />
@@ -174,7 +176,7 @@ export default function SetDate() {
                   <input
                     type="text"
                     className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-[#2fa79a]/30 focus:border-[#2fa79a]"
-                    placeholder="Example: April or Spring 2026 - 2027"
+                    placeholder="Ex: April or Spring 2026 - 2027"
                     name="preferredDate"
                   />
                 </div>

@@ -17,13 +17,11 @@ type ShowStatus = "OPEN" | "CLOSED" | "CANCELED" | ""
 type ShowDate = {
   id: number
   date: string
-  city: string
-  state: string
-  country: string
+  address: string
   schoolName: string
-  venueType: string
-  timeSlot: string
   status: ShowStatus
+  startTime: string
+  endTime: string
 }
 
 type TicketReservation = {
@@ -92,6 +90,18 @@ export default function AdminDashboard() {
     .filter((r) => !!r.createdAt)
     .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
     .slice(0, 5)
+
+  const formatDate = (date: string) => {
+  if (!date) return "-";
+
+  const [year, month, day] = date.split("-").map(Number);
+
+  return new Date(year, month - 1, day).toLocaleDateString("es-ES", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+  });
+};
 
   const pendingReservations = reservations.filter((r) => r.seatsConfirmed === null).length
 
@@ -361,11 +371,12 @@ export default function AdminDashboard() {
                             Fecha
                           </th>
                           <th className="pb-4 text-left text-xs font-bold text-[#243f4a]/60 uppercase tracking-wider">
-                            Ciudad
+                            Dirección
                           </th>
                           <th className="pb-4 text-left text-xs font-bold text-[#243f4a]/60 uppercase tracking-wider">
-                            Lugar
+                            Escuela
                           </th>
+                        
                           <th className="pb-4 text-left text-xs font-bold text-[#243f4a]/60 uppercase tracking-wider">
                             Estado
                           </th>
@@ -378,18 +389,12 @@ export default function AdminDashboard() {
                         {upcomingShows.map((s) => (
                           <tr key={s.id} className="group hover:bg-[#2fa79a]/5 transition-colors">
                             <td className="py-4 text-sm font-medium text-[#243f4a]">
-                              {s.date
-                                ? new Date(s.date).toLocaleDateString("es-ES", {
-                                    day: "numeric",
-                                    month: "short",
-                                    year: "numeric",
-                                  })
-                                : "-"}
+                              {s.date ? formatDate(s.date) : "-"}
                             </td>
                             <td className="py-4 text-sm font-medium text-[#243f4a]">
-                              {s.city}, {s.state}
+                             {s.address ?? "-"}
                             </td>
-                            <td className="py-4 text-sm text-[#243f4a]/70">{s.schoolName}</td>
+                            <td className="py-4 text-sm text-[#243f4a]/70">{s.schoolName ?? "-"}</td>
                             <td className="py-4">
                               <select
                                 value={s.status ?? ""}
@@ -454,7 +459,7 @@ export default function AdminDashboard() {
                             Fecha
                           </th>
                           <th className="pb-4 text-left text-xs font-bold text-[#243f4a]/60 uppercase tracking-wider">
-                            Organización
+                            Escuela
                           </th>
                           <th className="pb-4 text-left text-xs font-bold text-[#243f4a]/60 uppercase tracking-wider">
                             Show
@@ -484,7 +489,7 @@ export default function AdminDashboard() {
                               {r.organizationName || "(sin nombre)"}
                             </td>
                             <td className="py-4 text-sm text-[#243f4a]/70">
-                              {r.showDate ? `${r.showDate.city}, ${r.showDate.state}` : "—"}
+                              {r.showDate ? `${r.showDate.address}` : "—"}
                             </td>
                             <td className="py-4">
                               <div className="flex items-center gap-2">
