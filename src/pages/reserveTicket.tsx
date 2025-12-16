@@ -1,5 +1,6 @@
 // src/pages/reserveTicket.tsx
 import React, { useEffect, useState } from "react";
+import { publicFetch } from "@/services/api";
 
 type ShowDate = {
   id: number;
@@ -17,7 +18,7 @@ export default function ReserveTicket() {
   useEffect(() => {
     async function loadDates() {
       try {
-        const resp = await fetch("/api/show-dates/open");
+        const resp = await publicFetch("/api/show-dates/open");
         if (!resp.ok) throw new Error("Error loading open show dates");
 
         const data: ShowDate[] = await resp.json();
