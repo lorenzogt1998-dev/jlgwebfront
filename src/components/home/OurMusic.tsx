@@ -1,6 +1,3 @@
-import React from "react";
-import { Download, PlayCircle } from "lucide-react";
-
 export default function OurMusic() {
   return (
     <section className="bg-white">

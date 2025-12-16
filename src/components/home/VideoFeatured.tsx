@@ -1,10 +1,10 @@
 // src/components/home/VideoFeatured.tsx
 export default function VideoFeatured() {
   return (
-    <section className="bg-gradient-to-b from-black via-neutral-900 to-black py-12">
+    <section className="py-12">
     {/* contenedor */}
-      <div className="max-w-5xl mx-auto px-4">
-        {/* título */}
+      <div className="max-w-6xl mx-auto px-4 bg-gradient-to-b from-black via-neutral-900 to-black rounded-2xl py-12 overflow-hidden">
+       {/* título */}
         <div className="text-center mb-6">
           <h2 className="text-3xl md:text-4xl font-bold text-white tracking-wide">
             Last videoclip from Justo Lamas Group

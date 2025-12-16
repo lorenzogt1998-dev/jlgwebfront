@@ -11,7 +11,7 @@ export default function Footer() {
           <section>
             <h3 className="text-base font-semibold text-slate-900">About Us</h3>
             <p className="mt-3 text-sm leading-6 text-slate-600">
-              Breve descripción del programa o links destacados.
+              Justo Lamas Group inspires students through music and culture, making Spanish learning engaging and fun, while promoting inclusion, empathy, and personal growth since 1998.
             </p>
           </section>
 

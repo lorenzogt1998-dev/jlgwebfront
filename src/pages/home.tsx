@@ -63,6 +63,7 @@ export default function Home() {
         <Ticker items={[]} />
       </div>
 
+      {/* Our music and activities */}
       <div className="mb-16">
         <OurMusic />
       </div>

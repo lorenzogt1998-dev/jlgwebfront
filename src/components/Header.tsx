@@ -32,7 +32,7 @@ export default function Header() {
           {/* Logo + nombre (link al home) */}
           <Link to="/" className="flex items-center gap-3 cursor-pointer">
             <img
-              src="/images/logo_textwhite_final_300x58.png"   // 👈 ahora usamos el nuevo icono
+              src="/images/justolamas_sinfondo.png"   
               alt="Justo Lamas Group"
               className="h-8 w-auto object-contain"
             />
