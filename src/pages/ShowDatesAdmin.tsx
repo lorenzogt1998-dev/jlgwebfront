@@ -9,7 +9,8 @@ interface ShowDate {
     date: string;
     state: string;
     status: string;
-    timeSlot: string;
+    start_time: string;
+    end_time: string;
     venueName: string;
     venueType?: string;
     tour: {
@@ -227,8 +228,9 @@ const ShowDatesAdmin: React.FC = () => {
                                     <div className="flex items-center gap-2 mt-1">
                                         <Clock className="w-4 h-4 text-[#243f4a]/70" />
                                         <span className="font-semibold text-[#243f4a]">Time:</span>
-                                        <span>{formatTime(show.timeSlot)}</span>
+                                        <span>{formatTime(show.start_time)}</span>
                                     </div>
+                                    
                                 </div>
 
                                 <p className="text-sm text-gray-600 mt-4">
