@@ -41,14 +41,16 @@ export default function SetDate() {
   return (
     <div className="min-h-screen bg-gray-50 px-6 py-10 flex justify-center pt-28">
       <div className="w-full max-w-3xl">
-
         {/* HEADER */}
         <header className="text-center mb-10">
           <h1 className="text-3xl md:text-4xl font-bold text-[#243f4a] mb-4">
             Set a Date for Your School
           </h1>
           <p className="text-gray-500 max-w-2xl mx-auto">
-            Bring the Justo Lamas Group Concert to your school for an unforgettable musical and cultural experience. Complete this form and our team will contact you to coordinate dates, details, and availability.
+            Bring the Justo Lamas Group Concert to your school for an
+            unforgettable musical and cultural experience. Complete this form
+            and our team will contact you to coordinate dates, details, and
+            availability.
           </p>
         </header>
 
@@ -59,7 +61,9 @@ export default function SetDate() {
         >
           {/* Contact Information */}
           <div>
-            <h2 className="text-lg font-semibold text-[#243f4a] mb-3">Contact Information</h2>
+            <h2 className="text-lg font-semibold text-[#243f4a] mb-3">
+              Contact Information
+            </h2>
             <div className="grid md:grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm font-semibold text-[#243f4a] mb-1">
@@ -72,17 +76,7 @@ export default function SetDate() {
                   name="contactName"
                 />
               </div>
-              <div>
-                <label className="block text-sm font-semibold text-[#243f4a] mb-1">
-                  Role / Title
-                </label>
-                <input
-                  type="text"
-                  className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-[#2fa79a]/30 focus:border-[#2fa79a]"
-                  placeholder="Spanish teacher, Activities director, etc."
-                  name="role"
-                />
-              </div>
+
               <div>
                 <label className="block text-sm font-semibold text-[#243f4a] mb-1">
                   Email *
@@ -94,34 +88,27 @@ export default function SetDate() {
                   name="email"
                 />
               </div>
-              <div>
-                <label className="block text-sm font-semibold text-[#243f4a] mb-1">
-                  Cell Phone *
-                </label>
-                <input
-                  type="tel"
-                  required
-                  className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-[#2fa79a]/30 focus:border-[#2fa79a]"
-                  name="cellphone"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-semibold text-[#243f4a] mb-1">
-                  School Phone *
-                </label>
-                <input
-                  type="tel"
-                  required
-                  className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-[#2fa79a]/30 focus:border-[#2fa79a]"
-                  name="schoolphone"
-                />
+              <div className="md:col-span-2 flex justify-center">
+                <div className="w-full max-w-md">
+                  <label className="block text-sm font-semibold text-[#243f4a] mb-1 text-center">
+                    Cell Phone *
+                  </label>
+                  <input
+                    type="tel"
+                    required
+                    className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-[#2fa79a]/30 focus:border-[#2fa79a]"
+                    name="cellphone"
+                  />
+                </div>
               </div>
             </div>
           </div>
 
           {/* School Information */}
           <div>
-            <h2 className="text-lg font-semibold text-[#243f4a] mb-3">School Information</h2>
+            <h2 className="text-lg font-semibold text-[#243f4a] mb-3">
+              School Information
+            </h2>
             <div className="grid md:grid-cols-2 gap-4">
               <div className="md:col-span-2">
                 <label className="block text-sm font-semibold text-[#243f4a] mb-1">
@@ -149,6 +136,17 @@ export default function SetDate() {
 
               <div>
                 <label className="block text-sm font-semibold text-[#243f4a] mb-1">
+                  School Phone *
+                </label>
+                <input
+                  type="tel"
+                  required
+                  className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-[#2fa79a]/30 focus:border-[#2fa79a]"
+                  name="schoolphone"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-[#243f4a] mb-1">
                   Estimated Capacity (seats)
                 </label>
                 <input
@@ -163,18 +161,23 @@ export default function SetDate() {
 
           {/* Preferred Date */}
           <div>
-            <h2 className="text-lg font-semibold text-[#243f4a] mb-3">Date</h2>
-            <div className="grid md:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-sm font-semibold text-[#243f4a] mb-1">
-                  Preferred Month
-                </label>
-                <input
-                  type="text"
-                  className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-[#2fa79a]/30 focus:border-[#2fa79a]"
-                  placeholder="Example: April or Spring 2026 - 2027"
-                  name="preferredDate"
-                />
+            <h2 className="text-lg font-semibold text-[#243f4a] mb-3 text-center">
+              Date
+            </h2>
+
+            <div className="grid md:grid-cols-2 gap-4 justify-center">
+              <div className="md:col-span-2 flex justify-center">
+                <div className="w-full md:w-1/2">
+                  <label className="block text-sm font-semibold text-[#243f4a] mb-1 text-center">
+                    Preferred Month
+                  </label>
+                  <input
+                    type="text"
+                    className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-[#2fa79a]/30 focus:border-[#2fa79a]"
+                    placeholder="Example: April or Spring 2026 - 2027"
+                    name="preferredDate"
+                  />
+                </div>
               </div>
             </div>
           </div>
@@ -202,7 +205,9 @@ export default function SetDate() {
           </div>
         </form>
 
-        <p className="text-xs text-gray-400 text-center mt-8">Sistema de administración</p>
+        <p className="text-xs text-gray-400 text-center mt-8">
+          Sistema de administración
+        </p>
       </div>
     </div>
   );

@@ -10,7 +10,7 @@ type ShowDate = {
   city: string;
   state: string;
   country: string;
-  venueName: string;
+  schoolName: string;
   venueType: string;
   startTime: string;    // viene como "10:00:00"
   endTime: string;      // viene como "11:30:00"
@@ -132,7 +132,7 @@ function Accordion({ title, items }: { title: string; items: ShowDate[] }) {
                     {show.city}, {show.state}
                   </span>
                   <span className="text-xs text-slate-400">
-                    {show.venueName}
+                    {show.schoolName}
                   </span>
                   <span className="text-xs text-slate-400">
                     {formatTime(show.startTime)} — {formatTime(show.endTime)}
@@ -168,7 +168,7 @@ function Accordion({ title, items }: { title: string; items: ShowDate[] }) {
                       </p>
                       <p>
                         <strong className="text-slate-100">Venue:</strong>{" "}
-                        {show.venueName} ({show.venueType})
+                        {show.schoolName} ({show.venueType})
                       </p>
                       <p>
                         <strong className="text-slate-100">City:</strong>{" "}

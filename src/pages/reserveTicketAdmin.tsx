@@ -8,7 +8,7 @@ type ShowDate = {
   city: string;
   state: string;
   country: string;
-  venueName: string;
+  schoolName: string;
 };
 
 function formatShowDateLocal(dateStr: string) {
@@ -116,7 +116,7 @@ export default function ReserveTicketAdmin() {
             <option value="">Select one option…</option>
             {showDates.map((d) => (
               <option key={d.id} value={d.id}>
-                {formatShowDateLocal(d.date)} — {d.city}, {d.state} · {d.venueName}
+                {formatShowDateLocal(d.date)} — {d.city}, {d.state} · {d.schoolName}
               </option>
             ))}
           </select>

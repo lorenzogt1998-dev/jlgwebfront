@@ -20,7 +20,7 @@ type ShowDate = {
   city: string
   state: string
   country: string
-  venueName: string
+  schoolName: string
   venueType: string
   timeSlot: string
   status: ShowStatus
@@ -389,7 +389,7 @@ export default function AdminDashboard() {
                             <td className="py-4 text-sm font-medium text-[#243f4a]">
                               {s.city}, {s.state}
                             </td>
-                            <td className="py-4 text-sm text-[#243f4a]/70">{s.venueName}</td>
+                            <td className="py-4 text-sm text-[#243f4a]/70">{s.schoolName}</td>
                             <td className="py-4">
                               <select
                                 value={s.status ?? ""}

@@ -4,7 +4,7 @@ export async function createShowDate(data: {
   city: string;
   state: string;
   country: string;
-  venueName: string;
+  schoolName: string;
   venueType: string;
   timeSlot: string;
   status: string;

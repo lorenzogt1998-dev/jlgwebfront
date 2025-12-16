@@ -50,8 +50,7 @@ export default function SetDateAdmin() {
       city: data.get("city"),
       state: data.get("state"),
       country: data.get("country"),
-      venueName: data.get("venueName"),
-      venueType: data.get("venueType"),
+      schoolName: data.get("schoolName"),
       startTime: data.get("startTime"),
       endTime: data.get("endTime"),
       status: data.get("status"),
@@ -229,28 +228,16 @@ export default function SetDateAdmin() {
 
             <div className="md:col-span-2">
               <label className="block text-sm font-medium mb-1">
-                Venue Name *
+                School Name *
               </label>
               <input
                 type="text"
                 required
-                name="venueName"
-                placeholder="High School, Theater, etc."
+                name="schoolName"
                 className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-[#2fa79a]/30 focus:border-[#2fa79a]"
               />
             </div>
 
-            <div>
-              <label className="block text-sm font-medium mb-1">
-                Venue Type
-              </label>
-              <input
-                type="text"
-                name="venueType"
-                placeholder="SCHOOL, THEATER, OTHER…"
-                className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-[#2fa79a]/30 focus:border-[#2fa79a]"
-              />
-            </div>
 
             <div>
               <label className="block text-sm font-medium mb-1">

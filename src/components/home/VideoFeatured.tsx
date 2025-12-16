@@ -33,5 +33,6 @@ export default function VideoFeatured() {
         </div>
       </div>
     </section>
+
   );
 }
