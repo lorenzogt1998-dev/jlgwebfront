@@ -44,6 +44,12 @@ const ShowDatesAdmin: React.FC = () => {
         return `${day}/${month}/${year}`;
     };
 
+    const dateToNumber = (dateStr: string) => {
+        const [y, m, d] = dateStr.split("-").map(Number);
+        return new Date(y, m - 1, d).getTime(); // fecha local, sin UTC shift
+    };
+
+
     const fetchShowDates = async () => {
         try {
             const res = await adminFetch("/api/show-dates", {
@@ -57,12 +63,12 @@ const ShowDatesAdmin: React.FC = () => {
 
             /*se ordenan cronologicamente - priorizar los shows que están OPEN, 
             y dentro de cada grupo (OPEN o CLOSED) se ordenan cronológicamente.*/
-            
+
             const sorted = [...data].sort((a, b) => {
                 if (a.status === "OPEN" && b.status !== "OPEN") return -1;
                 if (a.status != "OPEN" && b.status === "OPEN") return 1;
-                
-                return new Date(a.date).getTime() - new Date(b.date).getTime();
+
+                return dateToNumber(a.date) - dateToNumber(b.date);
 
             });
             setShowDates(sorted);

@@ -52,7 +52,8 @@ export default function SetDateAdmin() {
       country: data.get("country"),
       venueName: data.get("venueName"),
       venueType: data.get("venueType"),
-      timeSlot: data.get("timeSlot"),
+      startTime: data.get("startTime"),
+      endTime: data.get("endTime"),
       status: data.get("status"),
     };
 
@@ -108,7 +109,11 @@ export default function SetDateAdmin() {
               <X className="w-5 h-5" />
             </button>
             <h2 className="text-xl font-bold text-[#243f4a] mb-4">
-              {showMessage.type === "success" ? "¡Éxito!" : showMessage.type === "error" ? "Error" : "Información"}
+              {showMessage.type === "success"
+                ? "¡Éxito!"
+                : showMessage.type === "error"
+                ? "Error"
+                : "Información"}
             </h2>
             <p className="text-gray-700 text-sm mb-6">{showMessage.text}</p>
           </div>
@@ -122,7 +127,9 @@ export default function SetDateAdmin() {
         {/* TOUR */}
         <div>
           <h2 className="text-lg font-semibold mb-3 text-[#243f4a]">Tour</h2>
-          <label className="block text-sm font-medium mb-1">Select Tour *</label>
+          <label className="block text-sm font-medium mb-1">
+            Select Tour *
+          </label>
           <select
             required
             disabled={loadingTours}
@@ -143,10 +150,15 @@ export default function SetDateAdmin() {
 
         {/* SHOWDATE */}
         <div>
-          <h2 className="text-lg font-semibold mb-3 text-[#243f4a]">Show Date Details</h2>
+          <h2 className="text-lg font-semibold mb-3 text-[#243f4a]">
+            Show Date Details
+          </h2>
           <div className="grid md:grid-cols-2 gap-4">
+            {/* DATE */}
             <div>
-              <label className="block text-sm font-medium mb-1">Date (yyyy-mm-dd) *</label>
+              <label className="block text-sm font-medium mb-1">
+                Date (yyyy-mm-dd) *
+              </label>
               <input
                 type="date"
                 required
@@ -154,14 +166,33 @@ export default function SetDateAdmin() {
                 className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-[#2fa79a]/30 focus:border-[#2fa79a]"
               />
             </div>
-            <div>
-              <label className="block text-sm font-medium mb-1">Time Slot</label>
-              <input
-                type="text"
-                name="timeSlot"
-                placeholder="Format 10:00:00"
-                className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-[#2fa79a]/30 focus:border-[#2fa79a]"
-              />
+
+            {/* START / END TIME */}
+            <div className="grid grid-cols-2 gap-2">
+              <div>
+                <label className="block text-sm font-medium mb-1">
+                  Start Time *
+                </label>
+                <input
+                  type="time"
+                  required
+                  name="startTime"
+                  defaultValue="10:00"
+                  className="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm focus:ring-2 focus:ring-[#2fa79a]/30 focus:border-[#2fa79a]"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium mb-1">
+                  End Time *
+                </label>
+                <input
+                  type="time"
+                  required
+                  name="endTime"
+                  defaultValue="11:30"
+                  className="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm focus:ring-2 focus:ring-[#2fa79a]/30 focus:border-[#2fa79a]"
+                />
+              </div>
             </div>
 
             <div>
@@ -184,7 +215,9 @@ export default function SetDateAdmin() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-1">Country *</label>
+              <label className="block text-sm font-medium mb-1">
+                Country *
+              </label>
               <input
                 type="text"
                 required
@@ -195,7 +228,9 @@ export default function SetDateAdmin() {
             </div>
 
             <div className="md:col-span-2">
-              <label className="block text-sm font-medium mb-1">Venue Name *</label>
+              <label className="block text-sm font-medium mb-1">
+                Venue Name *
+              </label>
               <input
                 type="text"
                 required
@@ -206,7 +241,9 @@ export default function SetDateAdmin() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-1">Venue Type</label>
+              <label className="block text-sm font-medium mb-1">
+                Venue Type
+              </label>
               <input
                 type="text"
                 name="venueType"
@@ -216,7 +253,9 @@ export default function SetDateAdmin() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-1">Status</label>
+              <label className="block text-sm font-medium mb-1">
+                Status
+              </label>
               <select
                 name="status"
                 defaultValue="OPEN"
@@ -224,7 +263,8 @@ export default function SetDateAdmin() {
               >
                 <option value="OPEN">OPEN</option>
                 <option value="CLOSED">CLOSED</option>
-                <option value="CANCELLED">CANCELLED</option>
+                {/* 👇 con una sola L para que matchee "CANCELED" */}
+                <option value="CANCELED">CANCELED</option>
               </select>
             </div>
           </div>

@@ -12,7 +12,8 @@ type ShowDate = {
   country: string;
   venueName: string;
   venueType: string;
-  timeSlot: string;
+  startTime: string;    // viene como "10:00:00"
+  endTime: string;      // viene como "11:30:00"
   status: ShowStatus;
   // si después tu backend manda más cosas (tour, etc.) las podés agregar acá
 };
@@ -22,12 +23,18 @@ const API_BASE_URL =
 
 // ------- helpers -------
 
+function parseLocalDate(dateStr: string) {
+  // dateStr = "YYYY-MM-DD"
+  const [y, m, d] = dateStr.split("-").map(Number);
+  return new Date(y, m - 1, d); // LOCAL, sin UTC shift
+}
+
 function monthNameFromDate(d: Date) {
   return d.toLocaleString("en-US", { month: "long" });
 }
 
 function formatDateHuman(dateStr: string) {
-  const d = new Date(dateStr);
+  const d = parseLocalDate(dateStr); // 🔴 ACÁ está el fix
   if (Number.isNaN(d.getTime())) return dateStr;
   return `${monthNameFromDate(d)} ${d.getDate()}, ${d.getFullYear()}`;
 }
@@ -72,19 +79,26 @@ function StatusButton({ show }: { show: ShowDate }) {
   return <p className="text-xs text-slate-400">&nbsp;</p>;
 }
 
+function formatTime(timeStr: string) {
+  if (!timeStr) return "";
+  const [h, m] = timeStr.split(":");
+  return `${h}:${m}`;
+}
+
 function Accordion({ title, items }: { title: string; items: ShowDate[] }) {
   const [open, setOpen] = useState<number | null>(null);
 
   const list = useMemo(
-    () =>
-      items
-        .slice()
-        .sort(
-          (a, b) =>
-            new Date(a.date).getTime() - new Date(b.date).getTime()
-        ),
-    [items]
-  );
+  () =>
+    items
+      .slice()
+      .sort(
+        (a, b) =>
+          parseLocalDate(a.date).getTime() -
+          parseLocalDate(b.date).getTime()
+      ),
+  [items]
+);
 
   if (!list.length) return null;
 
@@ -120,6 +134,9 @@ function Accordion({ title, items }: { title: string; items: ShowDate[] }) {
                   <span className="text-xs text-slate-400">
                     {show.venueName}
                   </span>
+                  <span className="text-xs text-slate-400">
+                    {formatTime(show.startTime)} — {formatTime(show.endTime)}
+                  </span>
                 </div>
 
                 <div className="flex items-center gap-3">
@@ -146,7 +163,8 @@ function Accordion({ title, items }: { title: string; items: ShowDate[] }) {
                       </p>
                       <p>
                         <strong className="text-slate-100">Time:</strong>{" "}
-                        {show.timeSlot}
+                        {formatTime(show.startTime)} — {formatTime(show.endTime)}
+
                       </p>
                       <p>
                         <strong className="text-slate-100">Venue:</strong>{" "}
