@@ -5,8 +5,8 @@ import { API_BASE_URL, publicFetch } from "@/services/api";
 type ShowDate = {
   id: number;
   date: string;
-  city: string;
-  state: string;
+  address: string;
+  schoolName: string;
 };
 
 export default function ReserveTicket() {
@@ -48,12 +48,11 @@ export default function ReserveTicket() {
       school: data.get("school"),
       schoolAddress: data.get("schoolAddress"),
       students: Number(data.get("students")),
-      grades: data.get("grades"),
       notes: data.get("notes"),
     };
 
     try {
-      const resp = await fetch(`${API_BASE_URL}/api/reservations`, {
+      const resp = await fetch(`${API_BASE_URL}/api/leads/reserve-ticket`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
@@ -68,6 +67,18 @@ export default function ReserveTicket() {
       alert("There was a problem sending the reservation. Please try again.");
     }
   }
+
+  const formatDate = (date: string) => {
+  if (!date) return "-";
+
+  const [year, month, day] = date.split("-").map(Number);
+
+  return new Date(year, month - 1, day).toLocaleDateString("en-US", {
+    month: "2-digit",
+    day: "2-digit",
+    year: "numeric",
+  });
+};
 
   // ───────────────────────────────
   // 3) Render del formulario (mismo estilo que SetDate)
@@ -98,7 +109,7 @@ export default function ReserveTicket() {
               Concert Location
             </h2>
             <label className="block text-sm font-semibold text-[#243f4a] mb-1">
-              Select a Date / City *
+              Select your show *
             </label>
 
             <select
@@ -107,16 +118,14 @@ export default function ReserveTicket() {
               className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm bg-white focus:ring-2 focus:ring-[#2fa79a]/30 focus:border-[#2fa79a]"
             >
               <option value="">Select one option…</option>
-
+              {/*toma los datos de la tabla show_date*/}
               {showDates.map((d) => (
                 <option key={d.id} value={d.id}>
-                  {new Date(d.date).toLocaleDateString("en-US", {
-                    month: "short",
-                    day: "numeric",
-                    year: "numeric",
-                  })}
+                  {d.date ? formatDate(d.date) : "-"}
                   {" — "}
-                  {d.city}, {d.state}
+                  {d.schoolName}
+                  {" — "}
+                  {d.address}
                 </option>
               ))}
             </select>
@@ -128,7 +137,7 @@ export default function ReserveTicket() {
               Contact Information
             </h2>
             <div className="grid md:grid-cols-2 gap-4">
-              <div>
+              <div className="md:col-span-2">
                 <label className="block text-sm font-semibold text-[#243f4a] mb-1">
                   Full Name *
                 </label>
@@ -139,17 +148,7 @@ export default function ReserveTicket() {
                   name="contactName"
                 />
               </div>
-              <div>
-                <label className="block text-sm font-semibold text-[#243f4a] mb-1">
-                  Role / Title
-                </label>
-                <input
-                  type="text"
-                  className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-[#2fa79a]/30 focus:border-[#2fa79a]"
-                  placeholder="Spanish teacher, Activities director, etc."
-                  name="role"
-                />
-              </div>
+            
               <div>
                 <label className="block text-sm font-semibold text-[#243f4a] mb-1">
                   Email *
@@ -188,6 +187,7 @@ export default function ReserveTicket() {
                 <input
                   type="text"
                   required
+                  placeholder="Granville High School"
                   className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-[#2fa79a]/30 focus:border-[#2fa79a]"
                   name="school"
                 />
@@ -200,6 +200,7 @@ export default function ReserveTicket() {
                 <input
                   type="text"
                   required
+                  placeholder="Ex: 248 New Burg Street, Granville, OH, ZIP 43023"
                   className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-[#2fa79a]/30 focus:border-[#2fa79a]"
                   name="schoolAddress"
                 />
@@ -217,16 +218,7 @@ export default function ReserveTicket() {
                   name="students"
                 />
               </div>
-              <div>
-                <label className="block text-sm font-semibold text-[#243f4a] mb-1">
-                  Grade Levels / ZIP Code
-                </label>
-                <input
-                  type="text"
-                  className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-[#2fa79a]/30 focus:border-[#2fa79a]"
-                  name="grades"
-                />
-              </div>
+              
             </div>
           </div>
 
