@@ -7,6 +7,7 @@ type ShowStatus = "OPEN" | "CLOSED" | "CANCELED" | "";
 type ShowDate = {
   id: number;
   date: string;       // ISO string desde el backend
+  address: string;
   city: string;
   state: string;
   country: string;
@@ -129,7 +130,9 @@ function Accordion({ title, items }: { title: string; items: ShowDate[] }) {
                     {formatDateHuman(show.date)}
                   </span>
                   <span className="text-sm text-slate-200">
-                    {show.city}, {show.state}
+                  {show.address}
+
+                  {/**  {show.city}, {show.state} **/}
                   </span>
                   <span className="text-xs text-slate-400">
                     {show.schoolName}
@@ -167,12 +170,13 @@ function Accordion({ title, items }: { title: string; items: ShowDate[] }) {
 
                       </p>
                       <p>
-                        <strong className="text-slate-100">Venue:</strong>{" "}
+                        <strong className="text-slate-100">School:</strong>{" "}
                         {show.schoolName} ({show.venueType})
                       </p>
                       <p>
-                        <strong className="text-slate-100">City:</strong>{" "}
-                        {show.city}, {show.state}, {show.country}
+                        <strong className="text-slate-100">Address:</strong>{" "}
+                        {show.address}
+                        {/*{show.city}, {show.state}, {show.country}*/}
                       </p>
                     </div>
 

@@ -1,6 +1,6 @@
 // src/pages/reserveTicket.tsx
 import React, { useEffect, useState } from "react";
-import { publicFetch } from "@/services/api";
+import { API_BASE_URL, publicFetch } from "@/services/api";
 
 type ShowDate = {
   id: number;
@@ -53,7 +53,7 @@ export default function ReserveTicket() {
     };
 
     try {
-      const resp = await fetch("/api/reservations", {
+      const resp = await fetch(`${API_BASE_URL}/api/reservations`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
