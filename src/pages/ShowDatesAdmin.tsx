@@ -8,6 +8,7 @@ import {
   RefreshCcw,
   Info,
   Search,
+  X,
 } from "lucide-react";
 
 interface ShowDate {
@@ -18,6 +19,7 @@ interface ShowDate {
   startTime: string; // "10:00:00"
   endTime: string; // "11:00:00"
   schoolName: string;
+  deleted: boolean;
   tour: {
     id: number;
     name: string;
@@ -32,7 +34,15 @@ const ShowDatesAdmin: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [searchTerm, setSearchTerm] = useState<string>("");
 
- // const token = localStorage.getItem("token");
+  // Estados para manejar modal y mensajes
+  const [deleteShowId, setDeleteShowId] = useState<number | null>(null);
+  const [forceDelete, setForceDelete] = useState(false);
+  const [showMessage, setShowMessage] = useState<{
+    type: "success" | "error" | "info";
+    text: string;
+  } | null>(null);
+
+  // const token = localStorage.getItem("token");
 
   const formatTime = (time: string) => {
     if (!time) return "--:--";
@@ -96,7 +106,7 @@ const ShowDatesAdmin: React.FC = () => {
 
   // FILTRADO EN EL FRONTEND
   useEffect(() => {
-    const term = (searchTerm).toLowerCase();
+    const term = searchTerm.toLowerCase();
     const filtered = showDates.filter(
       (show) =>
         show.address.toLowerCase().includes(term) ||
@@ -106,23 +116,68 @@ const ShowDatesAdmin: React.FC = () => {
     setFilteredDates(filtered);
   }, [searchTerm, showDates]);
 
-  const handleDelete = async (id: number) => {
-    if (!window.confirm("Are you sure you want to delete this show date?"))
-      return;
-    try {
-      await adminFetch(`/api/show-dates/${id}`, {
-        method: "DELETE",
-        /*headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },*/
-      });
-      setShowDates(showDates.filter((show) => show.id !== id));
-    } catch (error) {
-      console.error("Error deleting show date:", error);
-    }
-  };
+  // ELIMINAR SHOW DATE
+  function handleDelete(id: number) {
+    setDeleteShowId(id);
+    setForceDelete(false); // resetear modo forzar al abrir modal
+  }
 
+  async function confirmDelete() {
+    if (deleteShowId === null) return;
+
+    setLoading(true);
+
+    try {
+      const resp = await adminFetch(
+        `/api/show-dates/${deleteShowId}?force=${forceDelete}`,
+        { method: "DELETE" }
+      );
+
+      //  Show con reservas → pedir confirmación forzada
+      if (resp.status === 409 && !forceDelete) {
+        setForceDelete(true); //activa segundo popup
+        return;
+      }
+
+      if (!resp.ok) {
+        throw new Error("Error eliminando show");
+      }
+
+      // ✅ Eliminado OK
+      setShowDates((prev) => prev.filter((s) => s.id !== deleteShowId));
+
+      setShowMessage({
+        type: "success",
+        text: forceDelete
+          ? "Show eliminado correctamente (forzado)"
+          : "Show eliminado correctamente",
+      });
+      
+
+      setDeleteShowId(null);
+    } catch (err) {
+      console.error("Error deleting show date:", err);
+
+      setShowMessage({
+        type: "error",
+        text: "Error al eliminar el show",
+      });
+
+      setDeleteShowId(null);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  // CANCELAR ELIMINACIÓN
+  function cancelDelete() {
+    setDeleteShowId(null);
+    setForceDelete(false);
+    setShowMessage({ type: "info", text: "Eliminación cancelada" });
+    setTimeout(() => setShowMessage(null), 2500);
+  }
+
+  // EDITAR STATUS DE SHOW DATE
   const handleEditStatus = async (id: number) => {
     const currentShow = showDates.find((show) => show.id === id);
     if (!currentShow) return;
@@ -195,6 +250,24 @@ const ShowDatesAdmin: React.FC = () => {
           </a>
         </div>
 
+        {/*modal para renderizar la notif*/}
+        {showMessage && (
+          <div
+            className={`
+      mb-6 px-4 py-3 rounded-xl text-center text-sm shadow
+      ${
+        showMessage.type === "success"
+          ? "bg-[#2fa79a]/15 text-[#2fa79a]"
+          : showMessage.type === "error"
+          ? "bg-[#df6a47]/15 text-[#df6a47]"
+          : "bg-[#243f4a]/10 text-[#243f4a]"
+      }
+    `}
+          >
+            {showMessage.text}
+          </div>
+        )}
+
         {/* RESUMEN DE TOTAL */}
         <div className="bg-white/80 backdrop-blur-sm border border-gray-100 rounded-3xl shadow p-6 mb-10">
           <h3 className="text-sm text-gray-500 font-semibold tracking-wide uppercase">
@@ -217,7 +290,8 @@ const ShowDatesAdmin: React.FC = () => {
                 <div className="flex items-center gap-2">
                   <MapPin className="w-5 h-5 text-[#2fa79a]" />
                   <h4 className="font-bold text-lg text-[#243f4a]">
-                    {show.schoolName.charAt(0).toUpperCase() + show.schoolName.slice(1)}
+                    {show.schoolName.charAt(0).toUpperCase() +
+                      show.schoolName.slice(1)}
                   </h4>
                 </div>
 
@@ -247,7 +321,9 @@ const ShowDatesAdmin: React.FC = () => {
                   <div className="flex items-center gap-2 mt-1">
                     <Clock className="w-4 h-4 text-[#243f4a]/70" />
                     <span className="font-semibold text-[#243f4a]">Time:</span>
-                    <span>{formatTime(show.startTime)} - {formatTime(show.endTime)}</span>
+                    <span>
+                      {formatTime(show.startTime)} - {formatTime(show.endTime)}
+                    </span>
                   </div>
                 </div>
 
@@ -301,6 +377,50 @@ const ShowDatesAdmin: React.FC = () => {
           Sistema de administración
         </p>
       </div>
+      {deleteShowId !== null && (
+        <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50 px-4">
+          <div className="bg-white rounded-3xl shadow-xl p-8 w-full max-w-sm border border-gray-100 relative">
+            <button
+              onClick={cancelDelete}
+              className="absolute right-4 top-4 text-gray-400 hover:text-gray-600"
+              disabled={loading}
+            >
+              <X className="w-5 h-5" />
+            </button>
+
+            <h2 className="text-xl font-bold text-[#243f4a] mb-4 text-center">
+              {forceDelete ? "Forzar eliminación" : "Confirmar Eliminación"}
+            </h2>
+
+            <p className="text-gray-600 text-sm text-center mb-6">
+              {forceDelete
+                ? "Este show tiene reservas relacionadas.¿Estás seguro que querés eliminar el show y sus reservas relacionadas? Esta acción no se puede deshacer."
+                : "¿Seguro que deseas eliminar este show? Esta acción no se puede deshacer."}
+            </p>
+
+            <div className="flex justify-center gap-4">
+              <button
+                onClick={cancelDelete}
+                className="px-5 py-2.5 rounded-xl border border-gray-300 text-gray-600 hover:bg-gray-100 transition-all"
+                disabled={loading}
+              >
+                Cancelar
+              </button>
+              <button
+                onClick={confirmDelete}
+                className={`px-6 py-2.5 rounded-xl ${
+                  forceDelete
+                    ? "bg-gradient-to-r from-[#df6a47] to-[#f58c6c]"
+                    : "bg-gradient-to-r from-[#243f4a] to-[#2fa79a]"
+                } text-white font-semibold shadow hover:scale-[1.02] transition-all`}
+                disabled={loading}
+              >
+                {forceDelete ? "Forzar eliminación" : "Eliminar"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
