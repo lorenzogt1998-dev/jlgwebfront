@@ -69,16 +69,16 @@ export default function ReserveTicket() {
   }
 
   const formatDate = (date: string) => {
-  if (!date) return "-";
+    if (!date) return "-";
 
-  const [year, month, day] = date.split("-").map(Number);
+    const [year, month, day] = date.split("-").map(Number);
 
-  return new Date(year, month - 1, day).toLocaleDateString("en-US", {
-    month: "2-digit",
-    day: "2-digit",
-    year: "numeric",
-  });
-};
+    return new Date(year, month - 1, day).toLocaleDateString("en-US", {
+      month: "2-digit",
+      day: "2-digit",
+      year: "numeric",
+    });
+  };
 
   // ───────────────────────────────
   // 3) Render del formulario (mismo estilo que SetDate)
@@ -148,7 +148,19 @@ export default function ReserveTicket() {
                   name="contactName"
                 />
               </div>
-            
+              <div className="md:col-span-2 flex justify-center">
+                <div className="w-full max-w-md">
+                  <label className="block text-sm font-semibold text-[#243f4a] mb-1 text-center">
+                    Cell Phone *
+                  </label>
+                  <input
+                    type="tel"
+                    required
+                    className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-[#2fa79a]/30 focus:border-[#2fa79a]"
+                    name="cellphone"
+                  />
+                </div>
+              </div>
               <div>
                 <label className="block text-sm font-semibold text-[#243f4a] mb-1">
                   Email *
@@ -160,17 +172,7 @@ export default function ReserveTicket() {
                   name="email"
                 />
               </div>
-              <div>
-                <label className="block text-sm font-semibold text-[#243f4a] mb-1">
-                  Cell Phone *
-                </label>
-                <input
-                  type="tel"
-                  required
-                  className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-[#2fa79a]/30 focus:border-[#2fa79a]"
-                  name="phone"
-                />
-              </div>
+
               <div>
                 <label className="block text-sm font-semibold text-[#243f4a] mb-1">
                   School Phone *
@@ -229,7 +231,7 @@ export default function ReserveTicket() {
                   name="students"
                 />
               </div>
-              
+
             </div>
           </div>
 
