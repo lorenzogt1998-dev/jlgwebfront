@@ -171,7 +171,7 @@ function Accordion({ title, items }: { title: string; items: ShowDate[] }) {
                       </p>
                       <p>
                         <strong className="text-slate-100">School:</strong>{" "}
-                        {show.schoolName} ({show.venueType})
+                        {show.schoolName}
                       </p>
                       <p>
                         <strong className="text-slate-100">Address:</strong>{" "}
