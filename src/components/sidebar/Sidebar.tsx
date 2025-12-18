@@ -10,15 +10,16 @@ interface SidebarProps {
 
 export default function Sidebar({ widgets }: SidebarProps) {
   return (
-    <aside id="sidebar-wrapper" className="w-full lg:w-1/4 px-4">
-      <ul className="space-y-6">
+    <aside id="sidebar-wrapper" className="w-full px-4">
+      {/* antes: space-y-6 */}
+      <ul className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {widgets.map((w) => (
           <li
             key={w.id}
-            className="border rounded-lg p-4 shadow-sm bg-white/70 backdrop-blur-sm"
+            className="border rounded-3xl p-6 shadow-lg bg-white/80 backdrop-blur-sm border-gray-100"
           >
             {w.title && (
-              <h4 className="font-semibold text-lg mb-2 border-b pb-1">
+              <h4 className="font-semibold text-lg mb-4 text-[#243f4a] border-b pb-2">
                 {w.title}
               </h4>
             )}
