@@ -47,9 +47,7 @@ export default function SetDateAdmin() {
 
     const payload = {
       date: data.get("date"),
-      city: data.get("city"),
-      state: data.get("state"),
-      country: data.get("country"),
+      address: data.get("address"),
       schoolName: data.get("schoolName"),
       startTime: data.get("startTime"),
       endTime: data.get("endTime"),
@@ -156,7 +154,7 @@ export default function SetDateAdmin() {
             {/* DATE */}
             <div>
               <label className="block text-sm font-medium mb-1">
-                Date (yyyy-mm-dd) *
+                Date *
               </label>
               <input
                 type="date"
@@ -194,34 +192,13 @@ export default function SetDateAdmin() {
               </div>
             </div>
 
-            <div>
-              <label className="block text-sm font-medium mb-1">City *</label>
+            <div className="md:col-span-2">
+              <label className="block text-sm font-medium mb-1">Address*</label>
               <input
                 type="text"
                 required
-                name="city"
-                className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-[#2fa79a]/30 focus:border-[#2fa79a]"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium mb-1">State *</label>
-              <input
-                type="text"
-                required
-                name="state"
-                className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-[#2fa79a]/30 focus:border-[#2fa79a]"
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium mb-1">
-                Country *
-              </label>
-              <input
-                type="text"
-                required
-                defaultValue="USA"
-                name="country"
+                placeholder="Ex: 248 New Burg Street, Granville, OH, ZIP 43023"
+                name="address"
                 className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-[#2fa79a]/30 focus:border-[#2fa79a]"
               />
             </div>
@@ -233,6 +210,7 @@ export default function SetDateAdmin() {
               <input
                 type="text"
                 required
+                placeholder="Granville High School"
                 name="schoolName"
                 className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-[#2fa79a]/30 focus:border-[#2fa79a]"
               />
@@ -250,7 +228,6 @@ export default function SetDateAdmin() {
               >
                 <option value="OPEN">OPEN</option>
                 <option value="CLOSED">CLOSED</option>
-                {/* 👇 con una sola L para que matchee "CANCELED" */}
                 <option value="CANCELED">CANCELED</option>
               </select>
             </div>

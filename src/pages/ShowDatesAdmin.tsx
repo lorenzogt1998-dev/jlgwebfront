@@ -12,10 +12,8 @@ import {
 
 interface ShowDate {
   id: number;
-  city: string;
-  country: string;
   date: string;
-  state: string;
+  address: string;
   status: string;
   startTime: string; // "10:00:00"
   endTime: string; // "11:00:00"
@@ -34,7 +32,7 @@ const ShowDatesAdmin: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [searchTerm, setSearchTerm] = useState<string>("");
 
-  const token = localStorage.getItem("token");
+ // const token = localStorage.getItem("token");
 
   const formatTime = (time: string) => {
     if (!time) return "--:--";
@@ -57,18 +55,19 @@ const ShowDatesAdmin: React.FC = () => {
     try {
       const res = await adminFetch("/api/show-dates", {
         method: "GET",
+        /*
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
+        */
       });
       const rawData: ShowDate[] = await res.json();
 
       const normalizedData: ShowDate[] = rawData.map((show) => ({
         ...show,
-        city: show.city ?? "",
+        address: show.address ?? "",
         schoolName: show.schoolName ?? "",
-        country: show.country ?? "",
         startTime: show.startTime ?? "",
         endTime: show.endTime ?? "",
       }));
@@ -100,7 +99,7 @@ const ShowDatesAdmin: React.FC = () => {
     const term = (searchTerm).toLowerCase();
     const filtered = showDates.filter(
       (show) =>
-        show.city.toLowerCase().includes(term) ||
+        show.address.toLowerCase().includes(term) ||
         show.schoolName.toLowerCase().includes(term) ||
         formatDate(show.date).includes(term)
     );
@@ -113,10 +112,10 @@ const ShowDatesAdmin: React.FC = () => {
     try {
       await adminFetch(`/api/show-dates/${id}`, {
         method: "DELETE",
-        headers: {
+        /*headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
-        },
+        },*/
       });
       setShowDates(showDates.filter((show) => show.id !== id));
     } catch (error) {
@@ -131,10 +130,12 @@ const ShowDatesAdmin: React.FC = () => {
     try {
       const res = await adminFetch(`/api/show-dates/${id}/status`, {
         method: "PATCH",
+        /*
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
+        */
         body: JSON.stringify({ status: newStatus }),
       });
       if (!res.ok) throw new Error("Failed to update status");
@@ -216,7 +217,7 @@ const ShowDatesAdmin: React.FC = () => {
                 <div className="flex items-center gap-2">
                   <MapPin className="w-5 h-5 text-[#2fa79a]" />
                   <h4 className="font-bold text-lg text-[#243f4a]">
-                    {show.city.charAt(0).toUpperCase() + show.city.slice(1)}, {show.country}
+                    {show.schoolName.charAt(0).toUpperCase() + show.schoolName.slice(1)}
                   </h4>
                 </div>
 
@@ -251,7 +252,7 @@ const ShowDatesAdmin: React.FC = () => {
                 </div>
 
                 <p className="text-sm text-gray-600 mt-4">
-                  {show.schoolName.charAt(0).toUpperCase() + show.schoolName.slice(1)}
+                  Address: {show.address}
                 </p>
 
                 {show.tour.status && (
@@ -270,7 +271,7 @@ const ShowDatesAdmin: React.FC = () => {
                 )}
 
                 <p className="text-xs text-gray-400 mt-3">
-                  Tour: {show.tour.name} ({show.tour.year})
+                  Tour: {show.tour.name}
                 </p>
               </div>
 

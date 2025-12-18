@@ -79,7 +79,7 @@ export default function AdminDashboard() {
   const totalTours = tours.length
   const totalShowDates = showDates.length
   const totalReservations = reservations.length
-  const totalSeatsRequested = reservations.reduce((sum, r) => sum + (r.seatsRequested || 0), 0)
+  
 
   const upcomingShows = [...showDates]
     .filter((d) => !!d.date)
@@ -339,7 +339,7 @@ export default function AdminDashboard() {
               </div>
               <div className="space-y-2">
                 <p className="text-5xl font-bold text-[#f2a566] tracking-tight">{totalReservations}</p>
-                <p className="text-[#243f4a]/60 text-sm font-medium">{totalSeatsRequested} asientos solicitados</p>
+                <p className="text-[#243f4a]/60 text-sm font-medium">Total de reservas hechas</p>
               </div>
             </div>
           </NavLink>
@@ -587,10 +587,7 @@ export default function AdminDashboard() {
                   <span className="w-2 h-2 rounded-full bg-[#e8c76f] mt-2 flex-shrink-0" />
                   <span>{totalReservations} solicitudes de reserva recibidas.</span>
                 </li>
-                <li className="flex items-start gap-3 text-white/90 font-medium leading-relaxed">
-                  <span className="w-2 h-2 rounded-full bg-[#e8c76f] mt-2 flex-shrink-0" />
-                  <span>{totalSeatsRequested} asientos solicitados en total.</span>
-                </li>
+              
               </ul>
             </div>
           </div>
