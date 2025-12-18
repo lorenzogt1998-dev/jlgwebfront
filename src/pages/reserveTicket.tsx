@@ -5,6 +5,7 @@ import { API_BASE_URL, publicFetch } from "@/services/api";
 type ShowDate = {
   id: number;
   date: string;
+  address: string;
   city: string;
   state: string;
 };
@@ -116,7 +117,8 @@ export default function ReserveTicket() {
                     year: "numeric",
                   })}
                   {" — "}
-                  {d.city}, {d.state}
+                  {d.address}
+                  {/*{d.city}, {d.state}*/}
                 </option>
               ))}
             </select>
