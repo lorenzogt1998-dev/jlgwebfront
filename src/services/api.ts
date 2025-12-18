@@ -25,7 +25,7 @@ export async function adminFetch(
     ...(init.headers || {}),
   };
 
-  const resp = await fetch(url, { ...init, headers });
+  /*const resp = await fetch(url, { ...init, headers });
 
   if (!resp.ok) {
     const errText = await resp.text();
@@ -33,7 +33,11 @@ export async function adminFetch(
     throw new Error(`Admin request failed: ${resp.status}`);
   }
 
-  return resp;
+  return resp;*/
+
+  return fetch(url, { ...init, headers });
+
+  //fetch solo falla por red. - Los códigos HTTP (409, 400, 500) se manejan en el componente.
 }
 
 // 4) Public fetch para formularios sin auth (Contact, Set Date, etc.)

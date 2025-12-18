@@ -150,7 +150,7 @@ export default function AdminDashboard() {
       setError(null)
     } catch (err) {
       console.error("Error deleting show date:", err)
-      setError("Hubo un error al eliminar la fecha del show.")
+      setError("Hubo un error al eliminar la fecha del show porque tiene reservas relacionadas. Gestionar desde el panel de Shows.")
     } finally {
       setDeletingId(null)
     }
