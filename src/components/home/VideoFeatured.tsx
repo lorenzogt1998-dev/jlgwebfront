@@ -3,7 +3,7 @@ export default function VideoFeatured() {
   return (
     <section className="py-12">
     {/* contenedor */}
-      <div className="max-w-6xl mx-auto px-4 bg-gradient-to-b from-black via-neutral-900 to-black rounded-2xl py-12 overflow-hidden">
+      <div className="w-full px-4 bg-gradient-to-b from-black via-neutral-900 to-black rounded-2xl py-12 overflow-hidden">
        {/* título */}
         <div className="text-center mb-6">
           <h2 className="text-3xl md:text-4xl font-bold text-white tracking-wide">

@@ -226,7 +226,7 @@ export default function MediaPage() {
   const [activeId, setActiveId] = useState<number | null>(null);
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-12 pt-28">
+    <div className="w-full px-4 py-12 pt-28">
       {/* HEADER */}
       <header className="text-center mb-12">
         <h1 className="text-4xl md:text-4xl font-extrabold tracking-wide text-slate-900 mb-4">

@@ -11,7 +11,7 @@ export function HeroSlider() {
   ];
 
   return (
-    <section className="pt-[20px] mx-auto max-w-[1400px] px-3 sm:px-6 lg:px-8">
+    <section className="pt-[20px] w-full px-3 sm:px-6 lg:px-8">
       <div className="aspect-[16/5]">
         <Carousel slides={slides} />
       </div> 

@@ -16,7 +16,7 @@ export default function SplitSection({
   return (
     <section className="py-16 bg-white">
       <div
-        className={`max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center gap-10 ${
+        className={`w-full px-4 flex flex-col md:flex-row items-center gap-10 ${
           flip ? "md:flex-row-reverse" : ""
         }`}
       >
