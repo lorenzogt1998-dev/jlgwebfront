@@ -9,12 +9,7 @@ export type PostCard = {
   comments?: number;
 };
 
-export const tickerPosts: Pick<PostCard, "id" | "title" | "href">[] = [
-  { id: "1", title: "SET A DATE", href: "/posts/school-concerts" },
-  { id: "2", title: "RESERVE TICKET", href: "/posts/tour-highlights" },
-];
-
-export const latestPosts: PostCard[] = [
+export const tickerPosts: PostCard[] = [
   {
     id: "p1",
     title: "SET A DATE",

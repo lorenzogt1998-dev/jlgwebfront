@@ -29,7 +29,7 @@ export default function SidebarHome() {
 
   return (
     <section className="py-16">
-      <div className="max-w-6xl mx-auto px-4 text-center bg-gray-300 rounded-2xl py-16">
+      <div className="w-full px-4 text-center bg-gray-300 rounded-2xl py-16">
         {/* Título */}
         <h2 className="text-3xl md:text-4xl font-extrabold text-gray-800 uppercase">
           Justo Lamas Group Experience

@@ -1,7 +1,7 @@
 export default function OurMusic() {
   return (
     <section className="bg-white">
-      <div className="max-w-6xl mx-auto px-4 py-16">
+      <div className="w-full px-4 py-16">
         <div className="relative overflow-hidden rounded-2xl min-h-[320px] md:min-h-[420px]">
           {/* Imagen de fondo */}
           <img

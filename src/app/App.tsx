@@ -25,7 +25,7 @@ import ReservationsAdmin from "@/pages/ReservationsAdmin";
 
 
 
-// 🔐 Wrapper para proteger rutas admin
+// Wrapper para proteger rutas admin
 function RequireAdmin({ children }: { children: JSX.Element }) {
   const isAdmin = localStorage.getItem("isAdmin") === "true";
   return isAdmin ? children : <Navigate to="/admin/login" replace />;
