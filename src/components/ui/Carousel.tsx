@@ -1,33 +1,32 @@
-"use client"
+"use client";
 
-import React, { useEffect, useState } from "react"
-import useEmblaCarousel from "embla-carousel-react"
-import Autoplay from "embla-carousel-autoplay"
-import { ChevronLeft, ChevronRight } from "lucide-react"
+import React, { useEffect, useState } from "react";
+import useEmblaCarousel from "embla-carousel-react";
+import Autoplay from "embla-carousel-autoplay";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 type Slide = {
-  id: string | number
-  img: string
-  link?: string
-  title?: string
-  subtitle?: string
-  description?: string
-}
+  id: string | number;
+  img: string;
+  link?: string;
+  title?: string;
+  subtitle?: string;
+  description?: string;
+};
 
 export default function Carousel({ slides }: { slides: Slide[] }) {
-  const [emblaRef, emblaApi] = useEmblaCarousel(
-    { loop: true },
-    [Autoplay({ delay: 5000 })]
-  )
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [
+    Autoplay({ delay: 5000 }),
+  ]);
 
-  const [index, setIndex] = useState(0)
+  const [index, setIndex] = useState(0);
 
   useEffect(() => {
-    if (!emblaApi) return
-    const update = () => setIndex(emblaApi.selectedScrollSnap())
-    emblaApi.on("select", update)
-    update()
-  }, [emblaApi])
+    if (!emblaApi) return;
+    const update = () => setIndex(emblaApi.selectedScrollSnap());
+    emblaApi.on("select", update);
+    update();
+  }, [emblaApi]);
 
   return (
     <section className="relative h-[70vh] md:h-[80vh] overflow-hidden">
@@ -35,10 +34,7 @@ export default function Carousel({ slides }: { slides: Slide[] }) {
       <div ref={emblaRef} className="h-full overflow-hidden">
         <div className="flex h-full">
           {slides.map((slide) => (
-            <div
-              key={slide.id}
-              className="relative flex-[0_0_100%] h-full"
-            >
+            <div key={slide.id} className="relative flex-[0_0_100%] h-full">
               <a
                 href={slide.link ?? "#"}
                 target={slide.link?.startsWith("http") ? "_blank" : "_self"}
@@ -51,8 +47,7 @@ export default function Carousel({ slides }: { slides: Slide[] }) {
                   className="absolute inset-0 w-full h-full object-cover"
                 />
 
-                {/* OVERLAY */}
-                <div className="absolute inset-0 bg-black/50" />
+                
 
                 {/* CONTENT */}
                 {(slide.title || slide.subtitle || slide.description) && (
@@ -114,5 +109,5 @@ export default function Carousel({ slides }: { slides: Slide[] }) {
         ))}
       </div>
     </section>
-  )
+  );
 }
