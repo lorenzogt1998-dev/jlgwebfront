@@ -15,14 +15,14 @@ const songs: Song[] = [
     id: 1,
     title: "PERDER EL CONTROL",
     artist: "Justo Lamas Group",
-    src: "/audios/perder-el-control-master.wav",        
+    src: "/audios/perder-el-control-master.wav",
     cover: "/images/fue-un-error-portada-vacia.jpeg",
   },
   {
     id: 2,
     title: "FUE UN ERROR",
     artist: "Justo Lamas Group",
-    src: "/audios/fue-un-error.mp4",       
+    src: "/audios/fue-un-error.mp4",
     cover: "/images/fue-un-error-portada-vacia.jpeg",
   },
 ];
@@ -123,8 +123,8 @@ function SongCard({
     <article
       className={[
         "mb-6 rounded-3xl overflow-hidden",
-        "bg-gradient-to-r from-neutral-900 via-black to-neutral-900",
-        "border border-yellow-500/30 shadow-2xl",
+        "bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900",
+        "border border-yellow-400/30 shadow-xl",
         "transition-transform duration-300",
         isActive ? "scale-[1.01]" : "hover:scale-[1.01]",
         isActiveGlow,
@@ -132,7 +132,7 @@ function SongCard({
     >
       <div className="flex flex-col md:flex-row">
         {/* Portada */}
-        <div className="md:w-1/3 bg-black/80">
+        <div className="md:w-1/3 bg-blue">
           <div className="h-full w-full flex items-center justify-center p-3">
             <img
               src={cover}
@@ -148,7 +148,7 @@ function SongCard({
             <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-yellow-400 mb-1">
               Song {id.toString().padStart(2, "0")}
             </p>
-            <h3 className="text-xl font-extrabold uppercase tracking-wide text-yellow-300 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+            <h3 className="text-lg md:text-xl font-bold uppercase tracking-wide text-yellow-400">
               {title}
             </h3>
             <p className="text-xs text-slate-300 mt-1 mb-4">{artist}</p>
@@ -229,10 +229,13 @@ export default function MediaPage() {
     <div className="max-w-6xl mx-auto px-4 py-12 pt-28">
       {/* HEADER */}
       <header className="text-center mb-12">
-        <h1 className="text-4xl font-bold text-slate-800 mb-4">Our Music</h1>
-        <p className="text-slate-600 max-w-2xl mx-auto">
-          Enjoy the songs that inspire students across the country. Listen online
-          or download materials to use in your classroom.
+        <h1 className="text-4xl md:text-4xl font-extrabold tracking-wide text-slate-900 mb-4">
+          Our Music
+        </h1>
+
+        <p className="text-slate-600 max-w-2xl mx-auto leading-relaxed">
+          Enjoy the songs that inspire students across the country.
+          Listen online or download materials to use in your classroom.
         </p>
       </header>
 
@@ -255,7 +258,9 @@ export default function MediaPage() {
         {/* 📄 COLUMNA DERECHA: LYRICS & ACTIVITIES (estilo Hard Rock) */}
         <aside
           aria-label="Lyrics & Classroom Activities"
-          className="rounded-3xl bg-gradient-to-b from-neutral-900 via-neutral-950 to-black border border-yellow-500/40 shadow-2xl text-slate-100 px-6 py-7 lg:px-7 lg:py-8"
+          className="rounded-3xl bg-gradient-to-r from-[#0a1730] via-[#0b2342] to-[#0a1730] to-black border border-yellow-400/30 shadow-xl text-slate-100
+ px-6 py-7
+"
         >
           {/* Título + subtítulo */}
           <div className="mb-6 text-center lg:text-left">
@@ -276,7 +281,7 @@ export default function MediaPage() {
             {lyricsItems.map((item) => (
               <div
                 key={item.id}
-                className="rounded-2xl border border-yellow-500/30 bg-gradient-to-r from-neutral-900/80 via-black/90 to-neutral-900/80 px-4 py-4 shadow-lg"
+                className="rounded-2xl border border-yellow-500/30 bg-gradient-to-l from-blue-900/20 via-black/60 to-black-900/20 px-4 py-4 shadow-lg"
               >
                 {/* Encabezado de cada canción */}
                 <div className="flex items-start justify-between gap-3 mb-3">
@@ -319,7 +324,7 @@ export default function MediaPage() {
           </p>
           {/* CARD FINAL – MORE COMING SOON */}
           <div className="mt-16 max-w-xl mx-auto">
-            <div className="rounded-3xl bg-gradient-to-b from-neutral-900 via-neutral-950 to-black border border-yellow-500/40 shadow-xl px-6 py-8 text-center">
+            <div className="rounded-3xl bg-gradient-to-r from-blue-900/20 via-neutral-950 to-black border border-yellow-500/40 shadow-xl px-6 py-8 text-center">
 
               <h3 className="text-xl font-extrabold text-yellow-300 tracking-wide drop-shadow-[0_2px_4px_rgba(0,0,0,0.7)]">
                 More Music & Activities Coming Soon
