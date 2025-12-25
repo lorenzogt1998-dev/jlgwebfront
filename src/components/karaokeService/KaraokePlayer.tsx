@@ -148,7 +148,26 @@ export default function KaraokePlayer({
         return `${m}:${s}`;
     };
 
+const handleResetOffset = () => {
+  // 1) reset del offset (para letras)
+  setOffsetMs(0);
 
+  // 2) reset del audio (para canción)
+  const audio = audioRef.current;
+  if (!audio) return;
+
+  audio.pause();
+  audio.currentTime = 0;
+
+  // 3) reset de estados UI
+  setIsPlaying(false);
+  setCurrent(0);
+
+  // opcional: volver a centrar scroll si querés
+  requestAnimationFrame(() => {
+    activeLineRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+  });
+};
 
     return (
         <div className="w-full">
@@ -208,45 +227,17 @@ export default function KaraokePlayer({
                                         </div>
                                     </div>
 
-                                    {/* Offset */}
+                                    {/* button Reset */}
                                     <div className="flex flex-wrap items-center gap-2">
-                                        <span className="text-[11px] uppercase tracking-[0.3em] text-slate-400">
-                                            Sync Offset
-                                        </span>
-
                                         <button
                                             type="button"
-                                            onClick={() => setOffsetMs((v) => v - 250)}
-                                            className="inline-flex items-center gap-1 rounded-full border border-yellow-500/30 px-3 py-1.5 text-xs text-yellow-200 hover:bg-yellow-400/10 transition"
-                                            title="Back -250ms"
-                                        >
-                                            <Minus className="w-4 h-4" />
-                                            250ms
-                                        </button>
-
-                                        <button
-                                            type="button"
-                                            onClick={() => setOffsetMs((v) => v + 250)}
-                                            className="inline-flex items-center gap-1 rounded-full border border-yellow-500/30 px-3 py-1.5 text-xs text-yellow-200 hover:bg-yellow-400/10 transition"
-                                            title="Forward +250ms"
-                                        >
-                                            <Plus className="w-4 h-4" />
-                                            250ms
-                                        </button>
-
-                                        <button
-                                            type="button"
-                                            onClick={() => setOffsetMs(0)}
+                                            onClick={handleResetOffset}
                                             className="inline-flex items-center gap-1 rounded-full border border-slate-600/60 px-3 py-1.5 text-xs text-slate-200 hover:bg-white/5 transition"
                                             title="Reset offset"
                                         >
                                             <RotateCcw className="w-4 h-4" />
                                             Reset
                                         </button>
-
-                                        <span className="ml-auto text-xs text-slate-300">
-                                            Offset: <span className="text-yellow-300 font-semibold">{offsetMs}ms</span>
-                                        </span>
                                     </div>
                                 </div>
                             </div>
@@ -301,10 +292,6 @@ export default function KaraokePlayer({
                                     )}
                                 </div>
 
-
-                                <p className="mt-3 text-[11px] text-slate-400">
-                                    Tip: si la letra va tarde o temprano, ajustá <span className="text-yellow-300">Sync Offset</span>.
-                                </p>
                             </div>
 
                             <audio
