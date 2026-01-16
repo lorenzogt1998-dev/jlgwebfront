@@ -30,54 +30,53 @@ const songs: Song[] = [
     title: "CICATRICES",
     artist: "Justo Lamas Group",
     src: "/audios/cicatrices.wav",
-    cover: "/images/fue-un-error-portada-vacia.jpeg",
+    cover: "/images/1.png",
   },
       {
     id: 4,
     title: "CORAZÓN EN LA MALETA",
     artist: "Justo Lamas Group",
     src: "/audios/corazon-en-la-maleta.wav",
-    cover: "/images/fue-un-error-portada-vacia.jpeg",
+    cover: "/images/1.png",
   },
       {
     id: 5,
     title: "CUANDO NADIE VE",
     artist: "Justo Lamas Group",
     src: "/audios/cuando-nadie-ve.wav",
-    cover: "/images/fue-un-error-portada-vacia.jpeg",
+    cover: "/images/1.png",
   },
       {
     id: 6,
     title: "ERES TU",
     artist: "Justo Lamas Group",
     src: "/audios/eres-tu.wav",
-    cover: "/images/fue-un-error-portada-vacia.jpeg",
+    cover: "/images/1.png",
   },
       {
     id: 7,
     title: "MEJOR QUE AYER",
     artist: "Justo Lamas Group",
     src: "/audios/mejor-que-ayer.wav",
-    cover: "/images/fue-un-error-portada-vacia.jpeg",
+    cover: "/images/1.png",
   },
         {
     id: 8,
     title: "SIEMPRE POR SIEMPRE",
     artist: "Justo Lamas Group",
     src: "/audios/siempre-por-siempre.wav",
-    cover: "/images/fue-un-error-portada-vacia.jpeg",
+    cover: "/images/1.png",
   },
 ];
 
-// 🔹 Data para los PDFs (después cambiás los href a los PDF reales)
 const lyricsItems = [
   {
     id: 1,
     songNumber: "Song 01",
     title: "PERDER EL CONTROL",
     level: "Intermediate · B1",
-    lyricsHref: "/Docs/Perder-el-control.pdf",      // <-- acá luego va el PDF de la letra
-    activitiesHref: "/Docs/Perder-el-control-Activities.pdf", // <-- acá luego va el PDF de actividades
+    lyricsHref: "/Docs/Perder-el-control.pdf",      // <-- acá va el PDF de la letra
+    activitiesHref: "/Docs/Perder-el-control-Activities.pdf", // <-- acá va el PDF de actividades
   },
   {
     id: 2,
