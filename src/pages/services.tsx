@@ -30,6 +30,55 @@ const karaokeSongs: KaraokeSong[] = [
     cover: "/images/fue-un-error-portada-vacia.jpeg",
     lrcUrl: "/lrc/fue-un-error.lrc",
   },
+    {
+    id: 3,
+    title: "CICATRICES",
+    artist: "Justo Lamas Group",
+    audioSrc: "/audios/cicatrices.wav",
+    cover: "/images/fue-un-error-portada-vacia.jpeg",
+    lrcUrl: "/lrc/cicatrices.lrc",
+  },
+    {
+    id: 4,
+    title: "CORAZÓN EN LA MALETA",
+    artist: "Justo Lamas Group",
+    audioSrc: "/audios/corazon-en-la-maleta.wav",
+    cover: "/images/fue-un-error-portada-vacia.jpeg",
+    lrcUrl: "/lrc/corazon_en_la_Maleta.lrc",
+  },
+    {
+    id: 5,
+    title: "CUANDO NADIE VE",
+    artist: "Justo Lamas Group",
+    audioSrc: "/audios/cuando-nadie-ve.wav",
+    cover: "/images/fue-un-error-portada-vacia.jpeg",
+    lrcUrl: "/lrc/cuando_Nadie_Ve.lrc",
+  },
+    {
+    id: 6,
+    title: "ERES TU",
+    artist: "Justo Lamas Group",
+    audioSrc: "/audios/eres-tu.wav",
+    cover: "/images/fue-un-error-portada-vacia.jpeg",
+    lrcUrl: "/lrc/eres_Tu.lrc",
+  },
+    {
+    id: 7,
+    title: "MEJOR QUE AYER",
+    artist: "Justo Lamas Group",
+    audioSrc: "/audios/mejor-que-ayer.wav",
+    cover: "/images/fue-un-error-portada-vacia.jpeg",
+    lrcUrl: "/lrc/mejor_Que_Ayer.lrc",
+  },
+      {
+    id: 8,
+    title: "SIEMPRE POR SIEMPRE",
+    artist: "Justo Lamas Group",
+    audioSrc: "/audios/siempre-por-siempre.wav",
+    cover: "/images/fue-un-error-portada-vacia.jpeg",
+    lrcUrl: "/lrc/siempre_por_Siempre.lrc",
+  },
+  
 
 ];export default function Services() {
   const [selectedSong, setSelectedSong] = useState<KaraokeSong | null>(null);
