@@ -40,3 +40,13 @@
 .read-the-docs {
   color: #888;
 }
+
+.karaoke-fs:fullscreen {
+  background: #020617; /* slate-950-ish */
+  padding: 0;
+}
+
+.karaoke-fs:-webkit-full-screen {
+  background: #020617;
+  padding: 0;
+}
