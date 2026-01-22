@@ -5,6 +5,7 @@ import SidebarHome from "@/components/sidebar/SidebarHome";
 import { tickerPosts } from "@/mocks/home";
 import OurHistory from "./OurHistory";
 import VideoFeatured from "@/components/home/VideoFeatured";
+import VideoEmanuel from "@/components/home/VideoEmanuel";
 
 export default function Home() {
   return (
@@ -25,6 +26,11 @@ export default function Home() {
         {/* Sidebar de home */}
         <div className="mb-16">
           <SidebarHome />
+        </div>
+
+        {/* VIDEO EMANUEL */}
+        <div className="mb-16">
+          <VideoEmanuel />
         </div>
 
         {/* Our music and activities */}

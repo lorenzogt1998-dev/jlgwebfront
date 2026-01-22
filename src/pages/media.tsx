@@ -1,6 +1,12 @@
 // src/pages/media.tsx
 import React, { useRef, useState, useEffect } from "react";
-import { PlayCircle, PauseCircle, Download, FileText, BookOpen } from "lucide-react";
+import {
+  PlayCircle,
+  PauseCircle,
+  Download,
+  FileText,
+  BookOpen,
+} from "lucide-react";
 
 type Song = {
   id: number;
@@ -82,7 +88,7 @@ const lyricsItems = [
     songNumber: "Song 01",
     title: "PERDER EL CONTROL",
     level: "Intermediate · B1",
-    lyricsHref: "/Docs/Perder-el-control.pdf",      // <-- acá va el PDF de la letra
+    lyricsHref: "/Docs/Perder-el-control.pdf", // <-- acá va el PDF de la letra
     activitiesHref: "/Docs/Perder-el-control-Activities.pdf", // <-- acá va el PDF de actividades
   },
   {
@@ -149,9 +155,7 @@ const lyricsItems = [
     lyricsHref: "/Docs/Mejor_Que_Ayer.pdf",
     activitiesHref: "/Docs/Mejor_Que_Ayer_Activities.pdf",
   },
-
 ];
-
 
 type SongCardProps = Song & {
   isActive: boolean;
@@ -326,7 +330,6 @@ function SongCard({
   );
 }
 
-
 export default function MediaPage() {
   const [activeId, setActiveId] = useState<number | null>(null);
 
@@ -339,8 +342,8 @@ export default function MediaPage() {
         </h1>
 
         <p className="text-slate-600 max-w-2xl mx-auto leading-relaxed">
-          Enjoy the songs that inspire students across the country.
-          Listen online or download materials to use in your classroom.
+          Enjoy the songs that inspire students across the country. Listen
+          online or download materials to use in your classroom.
         </p>
       </header>
 
@@ -348,8 +351,6 @@ export default function MediaPage() {
       <div className="grid gap-10 lg:grid-cols-[minmax(0,1.7fr)_minmax(0,1.1fr)] items-start">
         {/* 🎵 COLUMNA IZQUIERDA: PLAYLIST */}
         <section id="playlist">
-
-
           {songs.map((song) => (
             <SongCard
               key={song.id}
@@ -427,17 +428,66 @@ export default function MediaPage() {
           <p className="mt-5 text-[11px] text-slate-400 text-center lg:text-left">
             {/* texto? */}
           </p>
+
+          {/* 🎥 VIDEO ACTIVITY – GETTING TO KNOW EMANUEL */}
+          <div className="mb-8">
+            <div className="rounded-2xl border border-yellow-500/30 bg-gradient-to-l from-blue-900/20 via-black/60 to-black-900/20 px-4 py-5 shadow-lg">
+              <div className="flex items-start justify-between gap-3 mb-3">
+                <div>
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-yellow-400">
+                    VIDEO ACTIVITY
+                  </p>
+                  <h3 className="text-lg font-bold uppercase tracking-wide text-yellow-300 drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)]">
+                    Getting to Know Emanuel
+                  </h3>
+                  <p className="text-xs text-slate-300 mt-1">
+                    Watch the interview and answer in Spanish using complete
+                    sentences.
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex flex-col sm:flex-row gap-2 mt-2">
+                {/* PDF */}
+                <a
+                  href="/Docs/Actividad_Conociendo_a_Emanuel.pdf"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center justify-center rounded-full bg-yellow-400 px-4 py-2 text-xs font-semibold text-black shadow-md hover:bg-yellow-300 hover:shadow-lg transition"
+                >
+                  <FileText className="w-4 h-4 mr-2" />
+                  Open Activity (PDF)
+                </a>
+
+                {/* Video (YouTube) */}
+                <a
+                  href="https://www.youtube.com/watch?v=yxYa86-feWo"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center justify-center rounded-full border border-yellow-400 px-4 py-2 text-xs font-semibold text-yellow-300 hover:bg-yellow-400/10 transition"
+                >
+                  <BookOpen className="w-4 h-4 mr-2" />
+                  Watch Video
+                </a>
+              </div>
+
+              <p className="mt-3 text-[11px] text-slate-400">
+                Teacher tip: Collect responses as a short paragraph or 12
+                numbered answers.
+              </p>
+            </div>
+          </div>
           {/* CARD FINAL – MORE COMING SOON */}
           <div className="mt-16 max-w-xl mx-auto">
             <div className="rounded-3xl bg-gradient-to-r from-blue-900/20 via-neutral-950 to-black border border-yellow-500/40 shadow-xl px-6 py-8 text-center">
-
               <h3 className="text-xl font-extrabold text-yellow-300 tracking-wide drop-shadow-[0_2px_4px_rgba(0,0,0,0.7)]">
                 More Music & Activities Coming Soon
               </h3>
 
               <p className="text-sm text-slate-300 mt-3 leading-relaxed">
-                We’re preparing new songs, lyric sheets, and exciting classroom activities
-                to continue supporting Spanish learning through music. Stay tuned!
+                We’re preparing new songs, lyric sheets, and exciting classroom
+                activities to continue supporting Spanish learning through
+                music. Stay tuned!
               </p>
 
               <div className="mt-6">
@@ -447,9 +497,7 @@ export default function MediaPage() {
               </div>
             </div>
           </div>
-
         </aside>
-
       </div>
     </div>
   );

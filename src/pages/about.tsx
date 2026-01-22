@@ -9,7 +9,7 @@ export default function About() {
       {/* HERO */}
       <HeroBanner
         image="/images/DSC0679.jpg"
-       /* image="/images/about/hero.jpg"*/
+        /* image="/images/about/hero.jpg"*/
         title="Justo Lamas Group"
         subtitle="Empowering students through culture, music and education."
       />
@@ -23,25 +23,25 @@ export default function About() {
           "Our vision is rooted in positivity, inclusion, and personal growth — values that have inspired hundreds of thousands of students across the country.",
         ]}
       />
-{/* ABOUT PROGRAM */}
-<SplitSection
-  title="About the Program"
-  text={[
-    "The Justo Lamas Group program promotes Spanish learning through live music and meaningful cultural experiences. Since 1998, the program has inspired thousands of students across the U.S., making Spanish exciting and accessible.",
-    "",
-    "• Students learn about Latin American culture and modern Spanish-speaking youth.",
-    "• They gain useful vocabulary and language structures in a fun, engaging way.",
-    "• The concert encourages empathy, inclusion, and motivation to pursue their dreams.",
-    "• It also helps students view their own culture from a new perspective.",
-    "",
-    "Our shows last about 90 minutes and combine Latin pop, rock, and traditional music with strong student interaction.",
-    "The performance is both entertaining and educational—an extension of the classroom.",
-    "Lyrics, lessons, and karaoke are available online so students can learn songs beforehand and sing along.",
-    "After the concert, students meet the artist, take photos, get autographs, and enjoy a personal cultural exchange."
-  ]}
-  image="/images/12J.LAMAS-WEB.jpg"
-  flip={false}
-/>
+      {/* ABOUT PROGRAM */}
+      <SplitSection
+        title="About the Program"
+        text={[
+          "The Justo Lamas Group program promotes Spanish learning through live music and meaningful cultural experiences. Since 1998, the program has inspired thousands of students across the U.S., making Spanish exciting and accessible.",
+          "",
+          "• Students learn about Latin American culture and modern Spanish-speaking youth.",
+          "• They gain useful vocabulary and language structures in a fun, engaging way.",
+          "• The concert encourages empathy, inclusion, and motivation to pursue their dreams.",
+          "• It also helps students view their own culture from a new perspective.",
+          "",
+          "Our shows last about 90 minutes and combine Latin pop, rock, and traditional music with strong student interaction.",
+          "The performance is both entertaining and educational—an extension of the classroom.",
+          "Lyrics, lessons, and karaoke are available online so students can learn songs beforehand and sing along.",
+          "After the concert, students meet the artist, take photos, get autographs, and enjoy a personal cultural exchange.",
+        ]}
+        image="/images/12J.LAMAS-WEB.jpg"
+        flip={false}
+      />
 
       {/* MANU */}
       <SplitSection
@@ -55,6 +55,40 @@ export default function About() {
         image="/images/DSC06753.jpg"
         flip={true}
       />
+
+      {/* MANU – VIDEO */}
+      <section className="py-12">
+        {/* contenedor – mismo fondo que Home */}
+        <div className="w-full px-4 bg-gradient-to-b from-black via-neutral-900 to-black rounded-2xl py-12 overflow-hidden">
+          {/* título */}
+          <div className="text-center mb-6">
+            <h2 className="text-3xl md:text-4xl font-bold text-white tracking-wide">
+              Meet Emanuel
+            </h2>
+            <p className="mt-2 text-sm md:text-base text-neutral-300">
+              Exclusive interview – Justo Lamas Group
+            </p>
+          </div>
+
+          {/* marco del video */}
+          <div className="relative max-w-5xl mx-auto">
+            {/* glow suave */}
+            <div className="absolute -inset-1 rounded-3xl bg-gradient-to-r from-sky-500/20 via-purple-500/20 to-pink-500/20 blur-xl opacity-80" />
+
+            <div className="relative bg-black rounded-3xl border border-neutral-700 overflow-hidden shadow-2xl">
+              <div className="aspect-video w-full">
+                <iframe
+                  className="w-full h-full"
+                  src="https://www.youtube.com/embed/yxYa86-feWo?rel=0&modestbranding=1"
+                  title="Emanuel – Interview | Justo Lamas Group"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* JUSTO LAMAS */}
       <SplitSection
