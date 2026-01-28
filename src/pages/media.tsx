@@ -128,7 +128,7 @@ const lyricsItems = [
     songNumber: "Song 06",
     title: "CORAZÓN EN LA MALETA",
     level: "Intermediate · B1",
-    lyricsHref: "/Docs/Corazon_en_la_Maleta.pdf",
+    lyricsHref: "/Docs/Corazon_en_la_Maletaaaaaa_Letra.pdf",
     activitiesHref: "/Docs/Corazon_en_la_Maleta_Activities.pdf",
   },
   {
