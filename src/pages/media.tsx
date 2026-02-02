@@ -35,7 +35,7 @@ const songs: Song[] = [
     id: 3,
     title: "QUIERO ENCONTRARTE",
     artist: "Justo Lamas Group",
-    src: "/audios/quiero-encontrarte.wav",
+    src: "/audios/QUIERO-ENCONTRARTE-MASTER.wav",
     cover: "/images/fue-un-error-portada-vacia.jpeg",
   },
   {
@@ -104,8 +104,8 @@ const lyricsItems = [
     songNumber: "Song 03",
     title: "QUIERO ENCONTRARTE",
     level: "Intermediate · B1",
-    lyricsHref: "/Docs/quiero-encontrarte.pdf",
-    activitiesHref: "/Docs/quiero-encontrarte-Activities.pdf",
+    lyricsHref: "/Docs/Quiero_Encontrarte_Letra_CORREGIDA.pdf",
+    activitiesHref: "/Docs/Quiero_Encontrarte_Activities_CORREGIDAS.pdf",
   },
   {
     id: 4,
