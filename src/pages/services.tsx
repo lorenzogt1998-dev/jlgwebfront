@@ -34,9 +34,9 @@ const karaokeSongs: KaraokeSong[] = [
     id: 3,
     title: "QUIERO ENCONTRARTE",
     artist: "Justo Lamas Group",
-    audioSrc: "/audios/quiero-encontrarte.wav",
+    audioSrc: "/audios/QUIERO-ENCONTRARTE-MASTER.wav",
     cover: "/images/fue-un-error-portada-vacia.jpeg",
-    lrcUrl: "/lrc/quiero-encontrarte.lrc",
+    lrcUrl: "/lrc/quiero_encontrarte.lrc",
   },
    {
     id: 4,
