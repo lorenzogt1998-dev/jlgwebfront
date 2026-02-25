@@ -86,6 +86,14 @@ const karaokeSongs: KaraokeSong[] = [
     cover: "/images/1.png",
     lrcUrl: "/lrc/mejor_Que_Ayer.lrc",
   },
+      {
+    id: 10,
+    title: "SOY FELIZ",
+    artist: "Justo Lamas Group",
+    audioSrc: "/audios/SOY-FELIZ-MASTER.wav",
+    cover: "/images/1.png",
+    lrcUrl: "/lrc/soy-feliz.lrc",
+  },
 
   
 

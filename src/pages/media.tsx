@@ -80,6 +80,13 @@ const songs: Song[] = [
     src: "/audios/mejor-que-ayer.wav",
     cover: "/images/1.png",
   },
+    {
+    id: 10,
+    title: "SOY FELIZ",
+    artist: "Justo Lamas Group",
+    src: "/audios/SOY-FELIZ-MASTER.wav",
+    cover: "/images/1.png",
+  },
 ];
 
 const lyricsItems = [
@@ -154,6 +161,14 @@ const lyricsItems = [
     level: "Intermediate · B1",
     lyricsHref: "/Docs/Mejor_Que_Ayer.pdf",
     activitiesHref: "/Docs/Mejor_Que_Ayer_Activities.pdf",
+  },
+  {
+  id: 10,
+  songNumber: "Song 10",
+  title: "SOY FELIZ",
+  level: "Intermediate · B1",
+  lyricsHref: "/Docs/Soy-Feliz.pdf",
+  activitiesHref: "/Docs/Soy-Feliz-Activities.pdf",
   },
 ];
 
