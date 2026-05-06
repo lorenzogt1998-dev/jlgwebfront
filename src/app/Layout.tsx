@@ -7,7 +7,7 @@ export default function Layout() {
   return (
     <div className="legacy">
       <Header />
-      <main id="wrapper">
+      <main id="wrapper" className="pt-[92px]">
         <Outlet />
       </main>
       <Footer />

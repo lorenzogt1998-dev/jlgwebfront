@@ -1,4 +1,4 @@
-import { HeroSlider } from "@/components/home/HeroSlider";
+import HeroYoutube from "@/components/home/HeroYoutube";
 import OurMusic from "@/components/home/OurMusic";
 import { PostList } from "@/components/home/PostList";
 import SidebarHome from "@/components/sidebar/SidebarHome";
@@ -14,7 +14,7 @@ export default function Home() {
 
       {/* Slider */}
       <div className="mb-10">
-        <HeroSlider />
+        <HeroYoutube />
       </div>
 
       {/* Content wrapper */}
