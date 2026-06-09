@@ -264,7 +264,7 @@ export default function Tour() {
       <div className="max-w-4xl mx-auto px-4 mb-10">
         <a href="/book_a_date.php" className="block">
           <img
-            src="/images/222.png"
+            src="/images/banner1080root.png"
             alt="Set a Date"
             className="w-full rounded-3xl shadow-xl border border-slate-200"
           />
@@ -285,7 +285,7 @@ export default function Tour() {
 
       {/* Acordeón con todos los shows */}
       {!loading && !error && (
-        <Accordion title="Legado Tour 2026-2027" items={shows} />
+        <Accordion title="Raíces Tour 2026-2027" items={shows} />
       )}
 
       <div className="max-w-4xl mx-auto px-4 mt-10 text-right text-xs text-slate-500">
