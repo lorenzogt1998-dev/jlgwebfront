@@ -1,6 +1,7 @@
 import { JSX } from "react";
 import "./App.css";
 import { Routes, Route, Navigate } from "react-router-dom";
+import { Analytics } from "@vercel/analytics/react";
 
 import Home from "../pages/home";
 import About from "../pages/about";
@@ -22,6 +23,7 @@ import AdminLogin from "@/pages/login";
 import ToursListAdmin from "@/pages/toursListAdmin";
 import ShowDatesAdmin from "@/pages/ShowDatesAdmin";
 import ReservationsAdmin from "@/pages/ReservationsAdmin";
+import Gallery from "@/pages/gallery";
 
 
 
@@ -33,7 +35,9 @@ function RequireAdmin({ children }: { children: JSX.Element }) {
 
 export default function App() {
   return (
-    <Routes>
+    <>
+      <Analytics />
+      <Routes>
       {/* TODAS las rutas cuelgan de Layout para que veas header y footer */}
       <Route element={<Layout />}>
         {/* públicas */}
@@ -45,6 +49,7 @@ export default function App() {
         <Route path="/thank-you" element={<ThankYou />} />
         <Route path="/services" element={<Services />} />
         <Route path="/media" element={<MediaPage />} />
+        <Route path="/gallery" element={<Gallery />} />
         <Route path="/posts/setadate" element={<SetDate />} />
         <Route path="/posts/reserveticket" element={<ReserveTicket />} />
 
@@ -115,6 +120,7 @@ export default function App() {
         {/* 404 mínima */}
         <Route path="*" element={<div className="p-8">Not found</div>} />
       </Route>
-    </Routes>
+      </Routes>
+    </>
   );
 }

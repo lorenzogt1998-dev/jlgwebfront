@@ -87,6 +87,27 @@ const songs: Song[] = [
     src: "/audios/SOY-FELIZ-MASTER.wav",
     cover: "/images/1.png",
   },
+  {
+    id: 11,
+    title: "HOY DE NUEVO",
+    artist: "Justo Lamas Group",
+    src: "/audios/hoy-de-nuevo.mp4",
+    cover: "/images/1.png",
+  },
+  {
+    id: 12,
+    title: "OYE",
+    artist: "Justo Lamas Group",
+    src: "/audios/oye-master.wav",
+    cover: "/images/1.png",
+  },
+  {
+    id: 13,
+    title: "VIVIR MI VIDA",
+    artist: "Justo Lamas Group",
+    src: "/audios/vivir-mi-vida-master.wav",
+    cover: "/images/1.png",
+  },
 ];
 
 const lyricsItems = [
@@ -169,6 +190,30 @@ const lyricsItems = [
   level: "Intermediate · B1",
   lyricsHref: "/Docs/Soy-Feliz.pdf",
   activitiesHref: "/Docs/Soy-Feliz-Activities.pdf",
+  },
+  {
+  id: 11,
+  songNumber: "Song 11",
+  title: "HOY DE NUEVO",
+  level: "Intermediate · B1",
+  lyricsHref: "/Docs/Hoy-De-Nuevo.pdf",
+  activitiesHref: "/Docs/Hoy-De-Nuevo-Activities.pdf",
+  },
+  {
+  id: 12,
+  songNumber: "Song 12",
+  title: "OYE",
+  level: "Intermediate · B1",
+  lyricsHref: "/Docs/OYE-letra.pdf",
+  activitiesHref: "/Docs/OYE-Activities.pdf",
+  },
+  {
+  id: 13,
+  songNumber: "Song 13",
+  title: "VIVIR MI VIDA",
+  level: "Intermediate · B1",
+  lyricsHref: "/Docs/Vivir-mi-vida-letra.pdf",
+  activitiesHref: "/Docs/Vivir-mi-vida-Activities.pdf",
   },
 ];
 

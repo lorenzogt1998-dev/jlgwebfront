@@ -30,15 +30,15 @@ export default function Header() {
       <div className="border-b border-slate-800">
         <div className="mx-auto max-w-7xl px-4 lg:px-8 h-14 flex items-center justify-between">
           {/* Logo + nombre (link al home) */}
-          <Link to="/" className="flex items-center gap-3 cursor-pointer">
+          <Link
+              to="/"
+              className="flex items-center cursor-pointer w-[180px] overflow-hidden"
+          >
             <img
-              src="/images/justolamas_sinfondo.png"   
-              alt="Justo Lamas Group"
-              className="h-8 w-auto object-contain"
+                src="/images/logoppptrans.png"
+                alt="Justo Lamas Group"
+                className="h-[45px] w-auto object-contain -ml-2"
             />
-            <span className="text-white font-semibold text-lg tracking-wide">
-
-            </span>
           </Link>
 
           {/* Desktop menu */}
@@ -47,6 +47,7 @@ export default function Header() {
             <NavLink to="/services" className="hover:text-sky-400">Karaoke</NavLink>
             <NavLink to="/tour" className="hover:text-sky-400">Tour</NavLink>
             <NavLink to="/media" className="hover:text-sky-400">Music</NavLink>
+            <NavLink to="/gallery" className="hover:text-sky-400">Gallery</NavLink>
             <NavLink to="/contact" className="hover:text-sky-400">Contact Us</NavLink>
           </nav>
 
@@ -75,6 +76,7 @@ export default function Header() {
             <NavLink to="/services" className="hover:text-sky-400">Services</NavLink>
             <NavLink to="/tour" className="hover:text-sky-400">Tour</NavLink>
             <NavLink to="/media" className="hover:text-sky-400">Music</NavLink>
+            <NavLink to="/gallery" className="hover:text-sky-400">Gallery</NavLink>
             <NavLink to="/contact" className="hover:text-sky-400">Contact Us</NavLink>
             <a href="/tour" className="mt-2 inline-flex w-full justify-center rounded-md bg-sky-500 px-3 py-2 font-semibold hover:bg-sky-600">
               .
