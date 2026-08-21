@@ -47,24 +47,30 @@ export default function Gallery() {
           {/* Info */}
           <div className="flex-1 text-center md:text-left">
             <div className="flex flex-col md:flex-row md:items-center gap-4 mb-4">
-              <h1 className="text-2xl font-bold text-white">emanuel.jlg</h1>
-              <span className="hidden md:inline px-4 py-1.5 rounded-lg bg-neutral-800 text-sm font-semibold text-white hover:bg-neutral-700 transition cursor-pointer">
+              {/*
+              <h1 className="text-2xl font-bold text-white">emanuel.jlg</h1>*/}
+              <a 
+                href="https://www.instagram.com/manu.l0pezz/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="hidden md:inline-block px-4 py-1.5 rounded-lg bg-neutral-800 text-sm font-semibold text-white hover:bg-neutral-700 transition cursor-pointer"
+              >
                 Follow
-              </span>
+              </a>
             </div>
 
             {/* Stats */}
             <div className="flex justify-center md:justify-start gap-8 mb-4">
               <div className="text-center md:text-left">
-                <span className="font-bold text-white">12</span>{" "}
+                <span className="font-bold text-black">12</span>{" "}
                 <span className="text-neutral-400 text-sm">posts</span>
               </div>
               <div className="text-center md:text-left">
-                <span className="font-bold text-white">0</span>{" "}
+                <span className="font-bold text-black">2230</span>{" "}
                 <span className="text-neutral-400 text-sm">followers</span>
               </div>
               <div className="text-center md:text-left">
-                <span className="font-bold text-white">0</span>{" "}
+                <span className="font-bold text-black">943</span>{" "}
                 <span className="text-neutral-400 text-sm">following</span>
               </div>
             </div>
@@ -72,7 +78,7 @@ export default function Gallery() {
             {/* Bio */}
             <div className="text-sm">
               <p className="font-semibold text-white">Emanuel</p>
-              <p className="text-neutral-400">Artist · Justo Lamas Group</p>
+              <p className="text-neutral-400">Artist · Emanuel Lopez</p>
               <p className="text-neutral-400">Inspiring students through music</p>
             </div>
           </div>
@@ -179,7 +185,8 @@ export default function Gallery() {
 
             {/* Sidebar con info */}
             <div className="md:w-80 flex flex-col bg-neutral-900">
-              {/* Header del post */}
+
+              {/* Header del post
               <div className="flex items-center gap-3 p-4 border-b border-neutral-800">
                 <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-600 p-0.5 flex-shrink-0">
                   <div className="w-full h-full rounded-full bg-neutral-900 overflow-hidden">
@@ -190,28 +197,29 @@ export default function Gallery() {
                     />
                   </div>
                 </div>
-                <span className="text-sm font-semibold text-white">emanuel.jlg</span>
-              </div>
+                <span className="text-sm font-semibold text-black">emanuel.jlg</span>
+              </div>*/}
 
               {/* Caption */}
               {selectedPost.caption && (
                 <div className="p-4 border-b border-neutral-800">
                   <p className="text-sm text-neutral-200">
-                    <span className="font-semibold text-white">emanuel.jlg </span>
+                    {/*
+                    <span className="font-semibold text-white">emanuel.jlg </span> */}
                     {selectedPost.caption}
                   </p>
                 </div>
               )}
 
-              {/* Acciones */}
+              {/* Acciones
               <div className="p-4 flex items-center gap-4 border-b border-neutral-800">
                 <Heart className="w-6 h-6 text-white hover:text-red-500 cursor-pointer transition" />
                 <MessageCircle className="w-6 h-6 text-white hover:text-neutral-400 cursor-pointer transition" />
                 <Send className="w-6 h-6 text-white hover:text-neutral-400 cursor-pointer transition" />
                 <Bookmark className="w-6 h-6 text-white hover:text-yellow-400 cursor-pointer transition ml-auto" />
-              </div>
+              </div>*/}
 
-              {/* Likes */}
+              {/* Likes
               <div className="p-4">
                 <p className="text-sm font-semibold text-white">
                   {selectedPost.likes} likes
@@ -219,7 +227,7 @@ export default function Gallery() {
                 <p className="text-xs text-neutral-500 mt-1">
                   Add a comment...
                 </p>
-              </div>
+              </div>*/}
             </div>
           </div>
         </div>

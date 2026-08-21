@@ -27,7 +27,7 @@ export const tickerPosts: PostCard[] = [
     date: "2024-09-21",
     author: "JLG",
     excerpt: "We’ve seen excitement and engagement grow with music in the classroom…",
-    image: "/images/DSC06892-Editarff.jpg",
+    image: "/images/DSC.jpeg",
     comments: 0,
   },
 ];

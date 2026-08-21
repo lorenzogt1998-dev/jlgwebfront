@@ -14,16 +14,8 @@ export default function Footer() {
               Justo Lamas Group inspires students through music and culture, making Spanish learning engaging and fun, while promoting inclusion, empathy, and personal growth since 1998.
             </p>
           </section>
-
           <section>
-            <h3 className="text-base font-semibold text-slate-900">Resources</h3>
-            <ul className="mt-3 space-y-2 text-sm">
-              <li><NavLink className="text-slate-600 hover:text-sky-700" to="/downloads">Downloads</NavLink></li>
-              <li><NavLink className="text-slate-600 hover:text-sky-700" to="/media">Music</NavLink></li>
-              <li><NavLink className="text-slate-600 hover:text-sky-700" to="/teachers">For Teachers</NavLink></li>
-            </ul>
           </section>
-
           <section>
             <h3 className="text-base font-semibold text-slate-900">Contact Us</h3>
             <p className="mt-3 text-sm text-slate-600">
