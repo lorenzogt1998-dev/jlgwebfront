@@ -61,6 +61,7 @@ export default function ReserveTicketAdmin() {
       city: data.get("city"),
       state: data.get("state"),
       students: Number(data.get("students")),
+      adults: Number(data.get("adults")),
       grades: data.get("grades"),
       notes: data.get("notes"),
     };
@@ -211,6 +212,17 @@ export default function ReserveTicketAdmin() {
                 required
                 min={1}
                 name="students"
+                className="w-full border rounded-md px-3 py-2 text-sm"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium mb-1">
+                Number of Adults
+              </label>
+              <input
+                type="number"
+                min={0}
+                name="adults"
                 className="w-full border rounded-md px-3 py-2 text-sm"
               />
             </div>

@@ -48,6 +48,7 @@ export default function ReserveTicket() {
       school: data.get("school"),
       schoolAddress: data.get("schoolAddress"),
       students: Number(data.get("students")),
+      adults: Number(data.get("adults")),
       notes: data.get("notes"),
     };
 
@@ -229,6 +230,18 @@ export default function ReserveTicket() {
                   min={1}
                   className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-[#2fa79a]/30 focus:border-[#2fa79a]"
                   name="students"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold text-[#243f4a] mb-1">
+                  Number of Adults
+                </label>
+                <input
+                  type="number"
+                  min={0}
+                  className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-[#2fa79a]/30 focus:border-[#2fa79a]"
+                  name="adults"
                 />
               </div>
 

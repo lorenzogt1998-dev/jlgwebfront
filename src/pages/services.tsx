@@ -16,11 +16,11 @@ type KaraokeSong = {
 const karaokeSongs: KaraokeSong[] = [
   {
     id: 1,
-    title: "PERDER EL CONTROL",
+    title: "OYE",
     artist: "Justo Lamas Group",
-    audioSrc: "/audios/perder-el-control-master.wav",
-    cover: "/images/fue-un-error-portada-vacia.jpeg",
-    lrcUrl: "/lrc/perder-el-control.lrc",
+    audioSrc: "/audios/oye-master.wav",
+    cover: "/images/1.png",
+    lrcUrl: "/lrc/oye.lrc",
   },
   {
     id: 2,
@@ -30,15 +30,15 @@ const karaokeSongs: KaraokeSong[] = [
     cover: "/images/fue-un-error-portada-vacia.jpeg",
     lrcUrl: "/lrc/fue-un-error.lrc",
   },
-    {
+  {
     id: 3,
-    title: "QUIERO ENCONTRARTE",
+    title: "VIVIR MI VIDA",
     artist: "Justo Lamas Group",
-    audioSrc: "/audios/QUIERO-ENCONTRARTE-MASTER.wav",
-    cover: "/images/fue-un-error-portada-vacia.jpeg",
-    lrcUrl: "/lrc/quiero_encontrarte.lrc",
+    audioSrc: "/audios/vivir-mi-vida-master.wav",
+    cover: "/images/1.png",
+    lrcUrl: "/lrc/vivir_mi_vida.lrc",
   },
-   {
+  {
     id: 4,
     title: "SIEMPRE POR SIEMPRE",
     artist: "Justo Lamas Group",
@@ -46,15 +46,15 @@ const karaokeSongs: KaraokeSong[] = [
     cover: "/images/1.png",
     lrcUrl: "/lrc/siempre_por_Siempre.lrc",
   },
-    {
+  {
     id: 5,
-    title: "CICATRICES",
+    title: "HOY DE NUEVO",
     artist: "Justo Lamas Group",
-    audioSrc: "/audios/cicatrices.wav",
+    audioSrc: "/audios/hoy-de-nuevo.mp4",
     cover: "/images/1.png",
-    lrcUrl: "/lrc/cicatrices.lrc",
+    lrcUrl: "/lrc/hoy_de_nuevo.lrc",
   },
-    {
+  {
     id: 6,
     title: "CORAZÓN EN LA MALETA",
     artist: "Justo Lamas Group",
@@ -62,41 +62,62 @@ const karaokeSongs: KaraokeSong[] = [
     cover: "/images/1.png",
     lrcUrl: "/lrc/corazon_en_la_Maleta.lrc",
   },
-    {
+  {
     id: 7,
+    title: "CICATRICES",
+    artist: "Justo Lamas Group",
+    audioSrc: "/audios/cicatrices.wav",
+    cover: "/images/1.png",
+    lrcUrl: "/lrc/cicatrices.lrc",
+  },
+  {
+    id: 8,
     title: "CUANDO NADIE VE",
     artist: "Justo Lamas Group",
     audioSrc: "/audios/cuando-nadie-ve.wav",
     cover: "/images/1.png",
     lrcUrl: "/lrc/cuando_Nadie_Ve.lrc",
   },
-    {
-    id: 8,
+  {
+    id: 9,
     title: "ERES TU",
     artist: "Justo Lamas Group",
     audioSrc: "/audios/eres-tu.wav",
     cover: "/images/1.png",
     lrcUrl: "/lrc/eres_Tu.lrc",
   },
-    {
-    id: 9,
+  {
+    id: 10,
+    title: "PERDER EL CONTROL",
+    artist: "Justo Lamas Group",
+    audioSrc: "/audios/perder-el-control-master.wav",
+    cover: "/images/fue-un-error-portada-vacia.jpeg",
+    lrcUrl: "/lrc/perder-el-control.lrc",
+  },
+  {
+    id: 11,
+    title: "QUIERO ENCONTRARTE",
+    artist: "Justo Lamas Group",
+    audioSrc: "/audios/QUIERO-ENCONTRARTE-MASTER.wav",
+    cover: "/images/fue-un-error-portada-vacia.jpeg",
+    lrcUrl: "/lrc/quiero_encontrarte.lrc",
+  },
+  {
+    id: 12,
     title: "MEJOR QUE AYER",
     artist: "Justo Lamas Group",
     audioSrc: "/audios/mejor-que-ayer.wav",
     cover: "/images/1.png",
     lrcUrl: "/lrc/mejor_Que_Ayer.lrc",
   },
-      {
-    id: 10,
+  {
+    id: 13,
     title: "SOY FELIZ",
     artist: "Justo Lamas Group",
     audioSrc: "/audios/SOY-FELIZ-MASTER.wav",
     cover: "/images/1.png",
     lrcUrl: "/lrc/soy-feliz.lrc",
   },
-
-  
-
 ];export default function Services() {
   const [selectedSong, setSelectedSong] = useState<KaraokeSong | null>(null);
 
