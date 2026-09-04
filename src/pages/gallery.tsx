@@ -11,11 +11,11 @@ type GalleryPost = {
 };
 
 const galleryPosts: GalleryPost[] = [
-  { id: 1, image: "/images/DSC05015.jpg", caption: "", likes: 0, comments: 0 },
-  { id: 2, image: "/images/DSC06696-Editar.jpg", caption: "", likes: 0, comments: 0 },
+  { id: 1, image: "/images/DSC04922-Editarrrr.jpeg", caption: "", likes: 0, comments: 0 },
+  { id: 2, image: "/images/DSC04936-Editarflaksenf.jpeg", caption: "", likes: 0, comments: 0 },
   { id: 3, image: "/images/DSC04839-Editar.jpg", caption: "", likes: 0, comments: 0 },
   { id: 4, image: "/images/DSC0tarrrr.jpeg", caption: "", likes: 0, comments: 0 },
-  { id: 5, image: "/images/DSC06795.jpg", caption: "", likes: 0, comments: 0 },
+  { id: 5, image: "/images/DSC04936-Editarvssef.jpeg", caption: "", likes: 0, comments: 0 },
   { id: 6, image: "/images/DSC04922itarrrr.jpeg", caption: "", likes: 0, comments: 0 },
   { id: 7, image: "/images/DSC04922-Err.jpeg", caption: "", likes: 0, comments: 0 },
   { id: 8, image: "/images/DSC04993-Editar.jpg", caption: "", likes: 0, comments: 0 },

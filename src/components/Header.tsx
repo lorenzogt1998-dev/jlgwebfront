@@ -13,7 +13,7 @@ export default function Header() {
         <div className="mx-auto max-w-7xl px-4 lg:px-8 h-9 flex items-center justify-between text-[13px]">
           <div className="flex items-center gap-4">
             <a
-              href="https://open.spotify.com/artist/3DMJaHcIkPnM4J6KtwJow3"
+              href="https://open.spotify.com/intl-es/album/2cOPSCnxJYDOd5xXge21yw?si=XGw1ZS-9TLKiJK6l3D51gQ&utm_source=whatsapp&nd=1&dlsi=6acce7df33b34822"
               aria-label="Spotify"
               className="hover:text-sky-400"
             >
